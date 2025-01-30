@@ -8,9 +8,8 @@ Developed as part of a Udemy course, this project provides a simple way to retri
 
 ## 🔗 Demo Dark / Light Mode
 
-![lightMode](https://github.com/user-attachments/assets/2c8cdef2-cc7e-493c-a78b-bff94266d1a5)
-
-![darkMode](https://github.com/user-attachments/assets/82c56490-d85c-439c-959c-d6953b274ae4)
+![lightMode](https://github.com/user-attachments/assets/9115d54b-04e5-4078-a647-5b976a6c7816)
+![darkMode](https://github.com/user-attachments/assets/2bece6c6-1740-46a3-b992-050a3032908a)
 
 ## 🚀 Features
 
