@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../components/common/header/Header";
 import Home from "../pages/home/Home";
 import About from "../pages/about/About";
-import Categories from "../pages/categories/Categories";
+import Category from "../pages/category/Category";
 import Contact from "../pages/contact/Contact";
 import Search from "../pages/search/Search";
 import Weather from "../pages/weather/Weather";
@@ -28,8 +28,8 @@ const AppRouter = () => {
             element={<About />}
           />
           <Route
-            path="/categories"
-            element={<Categories />}
+            path="/category"
+            element={<Category />}
           />
           <Route
             path="/contact"

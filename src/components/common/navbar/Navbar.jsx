@@ -9,13 +9,13 @@ const Navbar = () => {
     <div>
       <ul className={styles.topUL}>
         <li>
-          <p>Categories</p>
+          <p>Category</p>
           <ul className={styles.bottomUL}>
-            <li onClick={() => navigate("/categories", { state: { category: "business" } })}>Business</li>
-            <li onClick={() => navigate("/categories", { state: { category: "entertainment" } })}>Entertainment</li>
-            <li onClick={() => navigate("/categories", { state: { category: "general" } })}>General</li>
-            <li onClick={() => navigate("/categories", { state: { category: "health" } })}>Health</li>
-            <li onClick={() => navigate("/categories", { state: { category: "science" } })}>Science</li>
+            <li onClick={() => navigate("/category", { state: { category: "business" } })}>Business</li>
+            <li onClick={() => navigate("/category", { state: { category: "entertainment" } })}>Entertainment</li>
+            <li onClick={() => navigate("/category", { state: { category: "general" } })}>General</li>
+            <li onClick={() => navigate("/category", { state: { category: "health" } })}>Health</li>
+            <li onClick={() => navigate("/category", { state: { category: "science" } })}>Science</li>
           </ul>
         </li>
         <li onClick={() => navigate("/weather", { state: { category: "weather" } })}>

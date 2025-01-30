@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import styles from "./Categories.module.css";
+import styles from "./Category.module.css";
 import Spinner from "../../components/common/spinner/Spinner";
 import NewsCard from "../../components/specific/newsCard/NewsCard";
 
-const Categories = () => {
+const Category = () => {
   const navigate = useNavigate();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,19 +34,7 @@ const Categories = () => {
 
   console.log("news:", news);
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.left}>
-        <form>
-          <input type="text" />
-          <button>Filter Country</button>
-        </form>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.newsGrid}></div>
-      </div>
-    </div>
-  );
+  return <div className={styles.container}></div>;
 };
 
-export default Categories;
+export default Category;
