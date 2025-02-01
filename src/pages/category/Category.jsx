@@ -34,7 +34,22 @@ const Category = () => {
 
   console.log("news:", news);
 
-  return <div className={styles.container}></div>;
+  return (
+    <div className={styles.container}>
+      <h1>Category</h1>
+
+      {loading ? (
+        <Spinner />
+      ) : (
+        news.map((article, index) => (
+          <NewsCard
+            key={index}
+            article={article}
+          />
+        ))
+      )}
+    </div>
+  );
 };
 
 export default Category;

@@ -1,13 +1,44 @@
 import React from "react";
-import styles from "./Spinner.module.css";
+import { styled } from "../../../styles/globalStyles";
+
+// Container für den Spinner
+const SpinnerContainer = styled("div", {
+  margin: "100px auto",
+  width: "70px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
+// Einzelne Punkte im Spinner
+const Bounce = styled("div", {
+  width: "18px",
+  height: "18px",
+  backgroundColor: "$primary",
+  borderRadius: "100%",
+  display: "inline-block",
+  animation: "bouncedelay 1.4s infinite ease-in-out both",
+
+  variants: {
+    delay: {
+      first: { animationDelay: "-0.32s" },
+      second: { animationDelay: "-0.16s" },
+    },
+  },
+
+  "@keyframes bouncedelay": {
+    "0%, 80%, 100%": { transform: "scale(0)" },
+    "40%": { transform: "scale(1)" },
+  },
+});
 
 const Spinner = () => {
   return (
-    <div className={styles.spinner}>
-      <div className={styles.bounce1}></div>
-      <div className={styles.bounce2}></div>
-      <div className={styles.bounce3}></div>
-    </div>
+    <SpinnerContainer>
+      <Bounce delay="first" />
+      <Bounce delay="second" />
+      <Bounce />
+    </SpinnerContainer>
   );
 };
 

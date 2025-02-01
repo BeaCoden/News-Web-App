@@ -6,17 +6,14 @@ Developed as part of a Udemy course, this project provides a simple way to retri
 
 > ongoing 🏗️🛠️
 
-## 🔗 Demo Dark / Light Mode
-
-![lightMode](https://github.com/user-attachments/assets/9115d54b-04e5-4078-a647-5b976a6c7816)
-![darkMode](https://github.com/user-attachments/assets/2bece6c6-1740-46a3-b992-050a3032908a)
+## 🔗 Demo
 
 ## 🚀 Features
 
 - Top News: Retrieve and display the latest news via NewsAPI.
-- Dark Mode: Implement a dark mode using useReducer and Context API.
+- Search News: Search for news articles by keyword.
 - Load and Update News: Users can manually load and update news.
-- Responsive Design: Clean and responsive design that works well on all screen sizes.
+- Responsive Design: Clean and responsive design that works well on all screen sizes. Radix UI is used for styling.
 
 ## Getting Started with Create React App
 
@@ -88,4 +85,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# News-Web-App
