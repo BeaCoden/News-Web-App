@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
-import Slider from "../../components/common/slider/Slider";
-import Spinner from "../../components/common/spinner/Spinner";
-import NewsCard from "../../components/specific/newsCard/NewsCard";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
+import globusVideo from "../../assets/video/Globus.mp4";
 
-// **Gesamter Seiten-Container**
+// **📽️ Video-Hintergrund Styling**
+const BackgroundVideo = styled("video", {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100vw",
+  height: "100vh",
+  objectFit: "cover",
+  zIndex: -1,
+});
+
+// **📌 Gesamter Seiten-Container**
 const Container = styled("div", {
   padding: "20px",
   display: "flex",
@@ -17,6 +26,7 @@ const Container = styled("div", {
   margin: "10px auto",
   zIndex: 1,
   gap: "20px",
+  position: "relative",
 });
 
 // **Suchleiste Styling**
@@ -73,50 +83,12 @@ const SearchIcon = styled(Search, {
   height: "20px",
 });
 
-// **Breaking News Section (Slider)**
-const BreakingNewsSection = styled("div", {
-  width: "100%",
-  backgroundColor: "var(--color-secondary)",
-  padding: "20px",
-  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
-  marginBottom: "20px",
-  borderRadius: "10px",
-  position: "relative",
-  zIndex: 1,
-
-  "@media (max-width: 1024px)": {
-    padding: "15px",
-  },
-});
-
-// **News Grid Styling**
-const NewsGrid = styled("div", {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "20px",
-  width: "100%",
-});
-
-// **Wrapper für News-Bereich**
-const ContentWrapper = styled("div", {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "20px",
-  width: "100%",
-  marginTop: "20px",
-  position: "relative",
-  zIndex: 0,
-
-  "@media (max-width: 1024px)": {
-    gridTemplateColumns: "1fr",
-  },
-});
-
 const Home = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState(""); // Speichert den Suchtext
-  const [searchResults, setSearchResults] = useState([]); // Speichert die Suchergebnisse
+  const [searchResults, setSearchResults] = useState([]);
+
+  const [query, setQuery] = useState("");
 
   const apiKey = process.env.REACT_APP_API_KEY;
   const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
@@ -134,11 +106,11 @@ const Home = () => {
       }
     };
     fetchNews();
-  }, [url]); // 🔹 `url` jetzt als Dependency hinzugefügt
+  }, [url, setLoading, setNews]);
 
   // **Funktion zur Verarbeitung der Suche**
   const fetchSearchResults = async () => {
-    if (query.trim() === "") return; // Keine leere Suche absenden
+    if (query.trim() === "") return;
 
     const searchUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
     try {
@@ -157,61 +129,38 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      {/* 📌 Suchleiste mit Lupen-Button */}
-      <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="searching for news..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleSearch}
+    <>
+      {/* 📽️ Hintergrund-Video */}
+      <BackgroundVideo
+        autoPlay
+        loop
+        muted
+        playsInline>
+        <source
+          src={globusVideo}
+          type="video/mp4"
         />
-        <SearchButton onClick={fetchSearchResults}>
-          <SearchIcon />
-        </SearchButton>
-      </SearchContainer>
+        Dein Browser unterstützt keine Videos.
+      </BackgroundVideo>
 
-      {/* 📌 Breaking News Bereich mit Slider */}
-      <BreakingNewsSection>
-        <h2>🔥 Breaking News</h2>
-        <Slider sliderNews={news.slice(0, 5)} />
-      </BreakingNewsSection>
+      <Container>
+        {/* 📌 Suchleiste mit Lupen-Button */}
+        <SearchContainer>
+          <SearchInput
+            type="text"
+            placeholder="searching for news..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleSearch}
+          />
+          <SearchButton onClick={fetchSearchResults}>
+            <SearchIcon />
+          </SearchButton>
+        </SearchContainer>
 
-      {/* 📌 Haupt-News-Bereich */}
-      <h1>Latest News</h1>
-      <ContentWrapper>
-        <NewsGrid>
-          {loading ? (
-            <Spinner />
-          ) : query && searchResults.length > 0 ? (
-            searchResults.map((article, index) => (
-              <NewsCard
-                key={index}
-                title={article.title}
-                description={article.description}
-                urlToImage={article.urlToImage}
-                url={article.url}
-              />
-            ))
-          ) : query && searchResults.length === 0 ? (
-            <p>Keine Ergebnisse gefunden...</p>
-          ) : (
-            news.slice(5).map((article, index) => (
-              <NewsCard
-                key={index}
-                title={article.title}
-                description={article.description}
-                urlToImage={article.urlToImage}
-                url={article.url}
-              />
-            ))
-          )}
-        </NewsGrid>
-      </ContentWrapper>
-
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
+    </>
   );
 };
 

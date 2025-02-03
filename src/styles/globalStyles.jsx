@@ -28,7 +28,7 @@ export const globalStyles = globalCss({
   "*": { boxSizing: "border-box", margin: 0, padding: 0 },
   "html, body": {
     fontFamily: "Raleway, sans-serif",
-    backgroundColor: "var(--color-background)",
+    backgroundColor: "transparent",
     color: "var(--color-font)",
     transition: "background-color 0.3s ease, color 0.3s ease",
     minHeight: "100vh",
