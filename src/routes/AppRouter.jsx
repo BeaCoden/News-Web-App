@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ParallaxProvider } from "react-scroll-parallax";
 import Header from "../components/common/header/Header";
 import Home from "../pages/home/Home";
 import About from "../pages/about/About";
@@ -21,7 +22,7 @@ export const routes = [
 
 const AppRouter = () => {
   return (
-    <>
+    <ParallaxProvider>
       <Header />
       <Routes>
         {routes.map((route, index) => (
@@ -32,7 +33,7 @@ const AppRouter = () => {
           />
         ))}
       </Routes>
-    </>
+    </ParallaxProvider>
   );
 };
 
