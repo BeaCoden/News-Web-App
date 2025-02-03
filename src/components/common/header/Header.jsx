@@ -97,13 +97,15 @@ const Header = () => {
       {/* Desktop Navigation */}
       <NavigationMenu.Root>
         <MenuList>
-          {routes.map((route, index) => (
-            <NavigationMenu.Item
-              key={index}
-              onClick={() => navigate(route.path)}>
-              {route.label}
-            </NavigationMenu.Item>
-          ))}
+          {routes
+            .filter((route) => route.label !== "About" && route.label !== "Contact")
+            .map((route, index) => (
+              <NavigationMenu.Item
+                key={index}
+                onClick={() => navigate(route.path)}>
+                {route.label}
+              </NavigationMenu.Item>
+            ))}
           <NavigationMenu.Item>
             <ChangeTheme />
           </NavigationMenu.Item>
@@ -115,13 +117,15 @@ const Header = () => {
         <DropdownMenu.Root>
           <DropdownTrigger>☰</DropdownTrigger>
           <DropdownContent align="end">
-            {routes.map((route, index) => (
-              <DropdownItem
-                key={index}
-                onClick={() => navigate(route.path)}>
-                {route.label}
-              </DropdownItem>
-            ))}
+            {routes
+              .filter((route) => route.label !== "About" && route.label !== "Contact")
+              .map((route, index) => (
+                <DropdownItem
+                  key={index}
+                  onClick={() => navigate(route.path)}>
+                  {route.label}
+                </DropdownItem>
+              ))}
             <DropdownItem>
               <ChangeTheme />
             </DropdownItem>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "../../../styles/globalStyles";
 import * as Toggle from "@radix-ui/react-toggle";
-import { Linkedin, Github } from "lucide-react";
+import { Linkedin, Github, BookOpen, Contact } from "lucide-react";
 
 // Footer Container
 const FooterContainer = styled("footer", {
@@ -102,7 +102,7 @@ const Footer = () => {
         <FooterLinks>
           <FooterLinkItem>
             <FooterLink
-              href="https://www.linkedin.com/in/username"
+              href="https://www.linkedin.com/in/beapitzschke?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BBKg3cKmvTyGzjJ2bcXnVgw%3D%3D"
               target="_blank"
               rel="noreferrer">
               <Icon>
@@ -113,7 +113,7 @@ const Footer = () => {
           </FooterLinkItem>
           <FooterLinkItem>
             <FooterLink
-              href="https://www.github.com/username"
+              href="https://github.com/BeaCoden"
               target="_blank"
               rel="noreferrer">
               <Icon>
@@ -123,10 +123,20 @@ const Footer = () => {
             </FooterLink>
           </FooterLinkItem>
           <FooterLinkItem>
-            <Link to="/about">About</Link>
+            <FooterLink href="/about">
+              <Icon>
+                <BookOpen size={18} />
+              </Icon>
+              About
+            </FooterLink>
           </FooterLinkItem>
           <FooterLinkItem>
-            <Link to="/contact">Contact</Link>
+            <FooterLink href="/contact">
+              <Icon>
+                <Contact size={18} />
+              </Icon>
+              Contact
+            </FooterLink>
           </FooterLinkItem>
         </FooterLinks>
       </FooterContainer>
