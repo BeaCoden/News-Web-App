@@ -6,15 +6,15 @@ import { styled } from "../../styles/globalStyles";
 const SettingsContainer = styled("div", {
   padding: "20px",
   gap: "20px",
-  backgroundColor: "var(--color-background)", // Dynamisch durch Theme gesteuert
-  color: "var(--color-font)", // Dynamisch durch Theme gesteuert
+  backgroundColor: "var(--color-background)",
+  color: "var(--color-font)",
   transition: "background-color 0.3s ease, color 0.3s ease",
 });
 
 // Titel-Styling
 const Title = styled("h1", {
   fontSize: "2rem",
-  color: "var(--color-primary)", // Globale Farbe für Konsistenz
+  color: "var(--color-primary)",
 });
 
 const Settings = () => {

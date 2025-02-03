@@ -15,7 +15,7 @@ const SliderContainer = styled("div", {
   borderRadius: "10px",
   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
   position: "relative",
-  zIndex: 0, // **Stellt sicher, dass es unter dem Dropdown bleibt**
+  zIndex: 0,
 });
 
 // **Swiper-Styling**

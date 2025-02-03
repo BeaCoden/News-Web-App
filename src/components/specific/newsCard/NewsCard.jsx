@@ -66,7 +66,7 @@ const Description = styled("p", {
 });
 
 const NewsCard = ({ title, description, urlToImage, url }) => {
-  const theme = useContext(ThemeContext); // ✅ ThemeContext hier verwenden
+  const theme = useContext(ThemeContext);
 
   // Falls theme nicht geladen ist (z. B. vor erstem Render), einen Fallback setzen
   if (!theme) {

@@ -5,7 +5,6 @@ import AppRouter from "../src/routes/AppRouter";
 import { globalStyles } from "./styles/globalStyles";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
-// Global Styles initialisieren
 globalStyles();
 
 const App = () => (
