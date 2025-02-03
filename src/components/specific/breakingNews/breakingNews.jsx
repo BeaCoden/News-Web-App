@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Footer from "../../components/common/footer/Footer";
-import Slider from "../../components/common/slider/Slider";
-import { styled } from "../../styles/globalStyles";
+import Footer from "../../common/footer/Footer";
+import Slider from "../../common/slider/Slider";
+import { styled } from "../../../styles/globalStyles";
 
 // **Gesamter Seiten-Container**
 const Container = styled("div", {

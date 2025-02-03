@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Footer from "../../components/common/footer/Footer";
-import Spinner from "../../components/common/spinner/Spinner";
-import NewsCard from "../../components/specific/newsCard/NewsCard";
-import { styled } from "../../styles/globalStyles";
+import Footer from "../../common/footer/Footer";
+import Spinner from "../../common/spinner/Spinner";
+import NewsCard from "../newsCard/NewsCard";
+import { styled } from "../../../styles/globalStyles";
 
 // **Gesamter Seiten-Container**
 const Container = styled("div", {
