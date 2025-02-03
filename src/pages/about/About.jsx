@@ -1,12 +1,28 @@
 import React from "react";
-import styles from "./About.module.css";
+import Footer from "../../components/common/footer/Footer";
+import { styled } from "../../styles/globalStyles";
+
+// Container für die About-Seite
+const AboutContainer = styled("div", {
+  padding: "20px",
+  gap: "20px",
+  backgroundColor: "var(--color-background)",
+  color: "var(--color-font)",
+  transition: "background-color 0.3s ease, color 0.3s ease",
+});
+
+// Titel-Styling
+const Title = styled("h1", {
+  fontSize: "2rem",
+  color: "var(--color-primary)",
+});
 
 const About = () => {
   return (
-    <div className={styles.about}>
-      <h2>About</h2>
-      <p>This is a simple app that demonstrates how to use CSS Modules in a React application.</p>
-    </div>
+    <AboutContainer>
+      <Title>About</Title>
+      <Footer />
+    </AboutContainer>
   );
 };
 

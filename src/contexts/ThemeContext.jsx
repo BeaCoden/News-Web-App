@@ -1,34 +1,14 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
-const ThemeContext = createContext();
+export const ThemeContext = createContext();
 
-const INITIAL_STATE = {
-  darkMode: JSON.parse(localStorage.getItem("darkMode")) || true,
-};
-
-const themeReducer = (state, action) => {
-  switch (action.type) {
-    case "TOGGLE":
-      return { darkMode: !state.darkMode };
-    default:
-      return state;
-  }
-};
-
-const ThemeProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(themeReducer, INITIAL_STATE);
+export const ThemeProvider = ({ children }) => {
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (state.darkMode) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem("darkMode", JSON.stringify(state.darkMode));
-  }, [state.darkMode]);
+    document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light");
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
-  return <ThemeContext.Provider value={{ state, dispatch }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ darkMode, setDarkMode }}>{children}</ThemeContext.Provider>;
 };
-
-export { ThemeContext, ThemeProvider };

@@ -1,14 +1,48 @@
 import React from "react";
-import styles from "./Weather.module.css";
-import OnBuild from "../../components/specific/onBuild/OnBuild";
 import Footer from "../../components/common/footer/Footer";
+import { styled } from "../../styles/globalStyles";
+
+// **Container für die Wetter-Seite**
+const WeatherContainer = styled("div", {
+  minHeight: "100vh",
+  padding: "20px",
+  backgroundColor: "var(--color-background)",
+  color: "var(--color-font)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  transition: "background-color 0.3s ease, color 0.3s ease",
+});
+
+// **Styling für Wetteranzeige**
+const WeatherCard = styled("div", {
+  backgroundColor: "var(--color-secondary)",
+  padding: "20px",
+  borderRadius: "10px",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+  textAlign: "center",
+  width: "300px",
+});
+
+const Title = styled("h1", {
+  fontSize: "1.8rem",
+  color: "var(--color-primary)",
+  marginBottom: "10px",
+});
 
 const Weather = () => {
   return (
-    <div className={styles.container}>
-      <OnBuild />
+    <WeatherContainer>
+      <Title>🌤 Wetter</Title>
+      <WeatherCard>
+        <h2>Stadtname</h2>
+        <p>Wetterbeschreibung</p>
+        <h3>🌡 25°C</h3>
+        <p>💨 Wind: 5 m/s</p>
+      </WeatherCard>
       <Footer />
-    </div>
+    </WeatherContainer>
   );
 };
 

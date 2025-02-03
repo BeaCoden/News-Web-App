@@ -1,28 +1,28 @@
 import React from "react";
-import styles from "./Contact.module.css";
+import Footer from "../../components/common/footer/Footer";
+import { styled } from "../../styles/globalStyles";
+
+// Container für die Contact-Seite
+const ContactContainer = styled("div", {
+  padding: "20px",
+  gap: "20px",
+  backgroundColor: "var(--color-background)",
+  color: "var(--color-font)",
+  transition: "background-color 0.3s ease, color 0.3s ease",
+});
+
+// Titel-Styling
+const Title = styled("h1", {
+  fontSize: "2rem",
+  color: "var(--color-primary)",
+});
 
 const Contact = () => {
   return (
-    <div className={styles.contact}>
-      <h2>Contact</h2>
-      <p>
-        Send me an email at: <a href="mailto:bea.pitzschke.coden@gmail.com"> </a>
-      </p>
-      <ul className={styles.bottomUL}>
-        <li
-          onClick={() => {
-            window.open("mailto:bea.pitzschke.coden@gmail.com");
-          }}>
-          send Mail
-        </li>
-        <li
-          onClick={() => {
-            window.open("tel:+4915750000000");
-          }}>
-          call
-        </li>
-      </ul>
-    </div>
+    <ContactContainer>
+      <Title>Contact</Title>
+      <Footer />
+    </ContactContainer>
   );
 };
 

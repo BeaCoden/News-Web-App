@@ -1,54 +1,28 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
-import styles from "./Category.module.css";
-import Spinner from "../../components/common/spinner/Spinner";
-import NewsCard from "../../components/specific/newsCard/NewsCard";
+import React from "react";
+import Footer from "../../components/common/footer/Footer";
+import { styled } from "../../styles/globalStyles";
+
+// Container für die Category-Seite
+const CategoryContainer = styled("div", {
+  padding: "20px",
+  gap: "20px",
+  backgroundColor: "var(--color-background)",
+  color: "var(--color-font)",
+  transition: "background-color 0.3s ease, color 0.3s ease",
+});
+
+// Titel-Styling
+const Title = styled("h1", {
+  fontSize: "2rem",
+  color: "var(--color-primary)",
+});
 
 const Category = () => {
-  const navigate = useNavigate();
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const { state } = useLocation();
-
-  const apiKey = process.env.REACT_APP_API_KEY;
-  const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
-
-  const fetchNews = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(url);
-      setNews(data.articles);
-    } catch (error) {
-      console.error("Failed to fetch news:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchNews();
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log("news:", news);
-
   return (
-    <div className={styles.container}>
-      <h1>Category</h1>
-
-      {loading ? (
-        <Spinner />
-      ) : (
-        news.map((article, index) => (
-          <NewsCard
-            key={index}
-            article={article}
-          />
-        ))
-      )}
-    </div>
+    <CategoryContainer>
+      <Title>Category</Title>
+      <Footer />
+    </CategoryContainer>
   );
 };
 
