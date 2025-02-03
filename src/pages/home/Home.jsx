@@ -1,11 +1,13 @@
+// pages/Home.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
+import BreakingNews from "../../components/specific/breakingNews/breakingNews";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
 
-// **📽️ Video-Hintergrund Styling**
+// Hintergrundvideo (styled)
 const BackgroundVideo = styled("video", {
   position: "fixed",
   top: 0,
@@ -16,7 +18,7 @@ const BackgroundVideo = styled("video", {
   zIndex: -1,
 });
 
-// **📌 Gesamter Seiten-Container**
+// Hauptcontainer der Seite
 const Container = styled("div", {
   padding: "20px",
   display: "flex",
@@ -29,7 +31,7 @@ const Container = styled("div", {
   position: "relative",
 });
 
-// **Suchleiste Styling**
+// Styling der Suchleiste
 const SearchContainer = styled("div", {
   margin: "10px 0",
   width: "100%",
@@ -41,7 +43,6 @@ const SearchContainer = styled("div", {
   overflow: "hidden",
   backgroundColor: "var(--color-background)",
   transition: "border 0.3s ease, box-shadow 0.3s ease",
-
   "&:focus-within": {
     border: "2px solid var(--color-buttonHover)",
     boxShadow: "0px 0px 8px var(--color-buttonHover)",
@@ -56,7 +57,6 @@ const SearchInput = styled("input", {
   backgroundColor: "var(--color-background)",
   border: "none",
   outline: "none",
-
   "&::placeholder": {
     color: "var(--color-secondary)",
   },
@@ -71,7 +71,6 @@ const SearchButton = styled("button", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-
   "&:hover": {
     backgroundColor: "var(--color-buttonHover)",
   },
@@ -86,8 +85,6 @@ const SearchIcon = styled(Search, {
 const Home = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-
   const [query, setQuery] = useState("");
 
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -106,22 +103,21 @@ const Home = () => {
       }
     };
     fetchNews();
-  }, [url, setLoading, setNews]);
+  }, [url]);
 
-  // **Funktion zur Verarbeitung der Suche**
+  // Funktion zur Verarbeitung von Suchanfragen
   const fetchSearchResults = async () => {
     if (query.trim() === "") return;
-
     const searchUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
     try {
       const { data } = await axios.get(searchUrl);
-      setSearchResults(data.articles);
+      setNews(data.articles);
     } catch (error) {
       console.error("Fehler beim Abrufen der Suchergebnisse:", error);
     }
   };
 
-  // **Suchtaste oder Enter-Taste löst Suche aus**
+  // Suche über Enter-Taste oder Button
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       fetchSearchResults();
@@ -130,7 +126,7 @@ const Home = () => {
 
   return (
     <>
-      {/* 📽️ Hintergrund-Video */}
+      {/* Video-Hintergrund */}
       <BackgroundVideo
         autoPlay
         loop
@@ -144,7 +140,7 @@ const Home = () => {
       </BackgroundVideo>
 
       <Container>
-        {/* 📌 Suchleiste mit Lupen-Button */}
+        {/* Suchleiste */}
         <SearchContainer>
           <SearchInput
             type="text"
@@ -157,6 +153,9 @@ const Home = () => {
             <SearchIcon />
           </SearchButton>
         </SearchContainer>
+
+        {/* Breaking News – Artikel wischen sanft von rechts herein */}
+        <BreakingNews news={news} />
 
         <Footer />
       </Container>
