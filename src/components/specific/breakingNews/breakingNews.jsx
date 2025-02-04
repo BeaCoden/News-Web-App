@@ -23,7 +23,6 @@ const ArticleContainer = styled("div", {
   borderRadius: "10px",
   position: "relative",
   transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
-  // Starte mit einem moderaten Offset (z. B. 80px) nach rechts – so sieht man schon einen kleinen Versatz
   transform: "translateX(180px)",
   opacity: 0,
 });
@@ -54,7 +53,6 @@ const NewsArticle = ({ article }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setVisible(true);
-            // Sobald der Artikel sichtbar ist, braucht er nicht weiter beobachtet zu werden
             observerInstance.unobserve(entry.target);
           }
         });
@@ -62,12 +60,13 @@ const NewsArticle = ({ article }) => {
       { threshold: 0.2 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 

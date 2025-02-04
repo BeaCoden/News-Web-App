@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { styled } from "../../../styles/globalStyles";
 import noImage from "../../../assets/img/noImage.jpg";
-import { ThemeContext } from "../../../contexts/ThemeContext"; // ✅ ThemeContext importieren
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import Button from "../../common/button/Button";
 
 // Container für die News-Karte
