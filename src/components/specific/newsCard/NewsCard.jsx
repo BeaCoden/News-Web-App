@@ -1,11 +1,12 @@
+// components/common/newsCard/NewsCard.js
 import React, { useContext } from "react";
 import { styled } from "../../../styles/globalStyles";
 import noImage from "../../../assets/img/noImage.jpg";
 import { ThemeContext } from "../../../contexts/ThemeContext";
 import Button from "../../common/button/Button";
 
-// Card: Umfasst den gesamten Inhalt (Medienbereich + externer Link)
 const Card = styled("div", {
+  width: "100%",
   background: "$background",
   borderRadius: "8px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -22,30 +23,32 @@ const Card = styled("div", {
   },
 });
 
-// CardMedia: Bereich für Bild und Overlays
 const CardMedia = styled("div", {
   position: "relative",
   width: "100%",
   height: "200px",
   overflow: "hidden",
   cursor: "pointer",
-  // Beim Hover wird das TitleOverlay ausgeblendet und das DescriptionOverlay eingeblendet
   "&:hover .descriptionOverlay": {
     opacity: 1,
   },
   "&:hover .titleOverlay": {
     opacity: 0,
   },
+  "@media (min-width: 768px)": {
+    height: "250px",
+  },
+  "@media (min-width: 1024px)": {
+    height: "300px",
+  },
 });
 
-// Das Bild – füllt den gesamten Medienbereich aus
 const Image = styled("img", {
   width: "100%",
   height: "100%",
   objectFit: "cover",
 });
 
-// TitleOverlay: Am unteren Rand des Bildes, mit linearem Verlauf für bessere Lesbarkeit
 const TitleOverlay = styled("div", {
   position: "absolute",
   bottom: 0,
@@ -58,7 +61,6 @@ const TitleOverlay = styled("div", {
   opacity: 1,
 });
 
-// DescriptionOverlay: Bedeckt den gesamten Medienbereich; zeigt die Beschreibung (auf 3 Zeilen gekürzt) und den Button
 const DescriptionOverlay = styled("div", {
   position: "absolute",
   top: 0,
@@ -77,7 +79,6 @@ const DescriptionOverlay = styled("div", {
   opacity: 0,
 });
 
-// DescriptionText: Zeigt maximal 3 Zeilen an, überschüssiger Text wird abgeschnitten
 const DescriptionText = styled("p", {
   margin: 0,
   fontSize: "0.85rem",
@@ -88,7 +89,6 @@ const DescriptionText = styled("p", {
   WebkitBoxOrient: "vertical",
 });
 
-// Externer Link-Button (führt zur vollständigen Artikelseite)
 const ExternalLinkButton = styled(Button, {
   marginTop: "10px",
   padding: "5px 10px",

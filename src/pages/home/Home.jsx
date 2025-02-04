@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
-// import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
-import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
+// import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
+import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
@@ -18,7 +18,7 @@ const BackgroundVideo = styled("video", {
   zIndex: -1,
 });
 
-const Container = styled("div", {
+const HomeContainer = styled("div", {
   padding: "20px",
   display: "flex",
   flexDirection: "column",
@@ -134,7 +134,7 @@ const Home = () => {
         Dein Browser unterstützt keine Videos.
       </BackgroundVideo>
 
-      <Container>
+      <HomeContainer>
         <SearchContainer>
           <SearchInput
             type="text"
@@ -148,12 +148,11 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
-        {/* <BreakingNews news={news} /> */}
-
-        <BreakingNewsCarousel news={news} />
+        <BreakingNews news={news} />
+        {/* <BreakingNewsCarousel news={news} /> */}
 
         <Footer />
-      </Container>
+      </HomeContainer>
     </>
   );
 };
