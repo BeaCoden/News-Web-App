@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
-// import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
 import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
@@ -148,8 +147,8 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
+        {/* //TODO - Carousel anstelle von bisheriger animierter Komponente */}
         <BreakingNews news={news} />
-        {/* <BreakingNewsCarousel news={news} /> */}
 
         <Footer />
       </HomeContainer>

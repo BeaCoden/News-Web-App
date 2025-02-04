@@ -40,6 +40,7 @@ const ContentWrapper = styled("div", {
   },
 });
 
+//TODO - LatestNews-Komponente auf Home Seite einbinden
 const LatestNews = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -17,6 +17,7 @@ const Title = styled("h1", {
   color: "var(--color-primary)",
 });
 
+//TODO - Kontakt-Seite erstellen mit Kontaktformular
 const Contact = () => {
   return (
     <ContactContainer>

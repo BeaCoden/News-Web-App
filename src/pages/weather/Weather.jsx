@@ -31,6 +31,7 @@ const Title = styled("h1", {
   marginBottom: "10px",
 });
 
+//TODO - Wetterdaten einbinden aus API
 const Weather = () => {
   return (
     <WeatherContainer>

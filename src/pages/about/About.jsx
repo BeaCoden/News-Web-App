@@ -17,6 +17,7 @@ const Title = styled("h1", {
   color: "var(--color-primary)",
 });
 
+//TODO - About-Seite erstellen
 const About = () => {
   return (
     <AboutContainer>
