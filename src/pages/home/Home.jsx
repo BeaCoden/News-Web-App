@@ -7,7 +7,6 @@ import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
 
-// Hintergrundvideo (styled)
 const BackgroundVideo = styled("video", {
   position: "fixed",
   top: 0,
@@ -18,7 +17,6 @@ const BackgroundVideo = styled("video", {
   zIndex: -1,
 });
 
-// Hauptcontainer der Seite
 const Container = styled("div", {
   padding: "20px",
   display: "flex",
@@ -31,7 +29,6 @@ const Container = styled("div", {
   position: "relative",
 });
 
-// Styling der Suchleiste
 const SearchContainer = styled("div", {
   margin: "10px 0",
   width: "100%",
@@ -105,7 +102,6 @@ const Home = () => {
     fetchNews();
   }, [url]);
 
-  // Funktion zur Verarbeitung von Suchanfragen
   const fetchSearchResults = async () => {
     if (query.trim() === "") return;
     const searchUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
@@ -117,7 +113,6 @@ const Home = () => {
     }
   };
 
-  // Suche über Enter-Taste oder Button
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       fetchSearchResults();
@@ -126,7 +121,6 @@ const Home = () => {
 
   return (
     <>
-      {/* Video-Hintergrund */}
       <BackgroundVideo
         autoPlay
         loop
@@ -140,7 +134,6 @@ const Home = () => {
       </BackgroundVideo>
 
       <Container>
-        {/* Suchleiste */}
         <SearchContainer>
           <SearchInput
             type="text"
@@ -154,7 +147,6 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
-        {/* Breaking News – Artikel wischen sanft von rechts herein */}
         <BreakingNews news={news} />
 
         <Footer />

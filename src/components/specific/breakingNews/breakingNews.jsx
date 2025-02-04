@@ -1,12 +1,13 @@
 // components/specific/breakingNews/breakingNews.js
 import React, { useState, useEffect, useRef } from "react";
 import { styled } from "../../../styles/globalStyles";
+import NewsCard from "../newsCard/NewsCard";
 
-// Der Wrapper sorgt dafür, dass horizontales Scrollen unterbunden wird.
+// Gesamt-Container für den Breaking-News-Bereich
 const SectionWrapper = styled("div", {
   width: "100%",
   padding: "20px 0",
-  overflowX: "hidden", // Verhindert horizontales Scrollen
+  overflowX: "hidden",
 });
 
 // Überschrift
@@ -14,36 +15,28 @@ const Title = styled("h2", {
   marginBottom: "20px",
 });
 
-// Container für jeden Artikel mit Swipe‑Effekt
-const ArticleContainer = styled("div", {
-  backgroundColor: "var(--color-secondary)",
-  padding: "20px",
-  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
-  marginBottom: "20px",
-  borderRadius: "10px",
-  position: "relative",
+// Grid-Container – responsives Layout: 1 Spalte (Smartphones), 2 Spalten (Tablets) und 4 Spalten (Laptops)
+const GridContainer = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "repeat(1, 1fr)",
+  gap: "20px",
+  "@media(min-width: 768px)": {
+    gridTemplateColumns: "repeat(2, 1fr)",
+  },
+  "@media(min-width: 1024px)": {
+    gridTemplateColumns: "repeat(4, 1fr)",
+  },
+});
+
+// Wrapper für den Swipe-Effekt
+const AnimatedWrapper = styled("div", {
   transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
-  transform: "translateX(180px)",
+  transform: "translateX(80px)",
   opacity: 0,
 });
 
-// Optionales Styling für das Artikelbild
-const ArticleImage = styled("img", {
-  width: "100%",
-  height: "auto",
-  borderRadius: "8px",
-  marginBottom: "10px",
-});
-
-// Titel und Beschreibung des Artikels
-const ArticleTitle = styled("h3", {
-  margin: "0 0 10px 0",
-});
-const ArticleDescription = styled("p", {
-  margin: 0,
-});
-
-const NewsArticle = ({ article }) => {
+// Komponente, die den Swipe-in-Effekt mittels Intersection Observer realisiert
+const AnimatedNewsCard = ({ article }) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -60,32 +53,29 @@ const NewsArticle = ({ article }) => {
       { threshold: 0.2 }
     );
 
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (ref.current) {
+      observer.observe(ref.current);
     }
 
     return () => {
-      if (currentRef) observer.unobserve(currentRef);
+      if (ref.current) observer.unobserve(ref.current);
     };
   }, []);
 
   return (
-    <ArticleContainer
+    <AnimatedWrapper
       ref={ref}
       style={{
         transform: visible ? "translateX(0)" : "translateX(80px)",
         opacity: visible ? 1 : 0,
       }}>
-      {article.urlToImage && (
-        <ArticleImage
-          src={article.urlToImage}
-          alt={article.title}
-        />
-      )}
-      <ArticleTitle>{article.title}</ArticleTitle>
-      <ArticleDescription>{article.description}</ArticleDescription>
-    </ArticleContainer>
+      <NewsCard
+        title={article.title}
+        description={article.description}
+        urlToImage={article.urlToImage}
+        url={article.url}
+      />
+    </AnimatedWrapper>
   );
 };
 
@@ -93,12 +83,14 @@ const BreakingNews = ({ news }) => {
   return (
     <SectionWrapper>
       <Title>🔥 Breaking News</Title>
-      {news.map((article, index) => (
-        <NewsArticle
-          key={index}
-          article={article}
-        />
-      ))}
+      <GridContainer>
+        {news.map((article, index) => (
+          <AnimatedNewsCard
+            key={index}
+            article={article}
+          />
+        ))}
+      </GridContainer>
     </SectionWrapper>
   );
 };

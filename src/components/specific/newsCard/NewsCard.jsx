@@ -1,10 +1,11 @@
+// components/common/newsCard/NewsCard.js
 import React, { useContext } from "react";
 import { styled } from "../../../styles/globalStyles";
 import noImage from "../../../assets/img/noImage.jpg";
 import { ThemeContext } from "../../../contexts/ThemeContext";
 import Button from "../../common/button/Button";
 
-// Container für die News-Karte
+// Container für die News-Karte mit fester Mindesthöhe
 const Card = styled("div", {
   background: "$background",
   padding: "20px",
@@ -13,13 +14,14 @@ const Card = styled("div", {
   transition: "transform 0.2s ease-in-out",
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
+  alignItems: "flex-end",
   textAlign: "center",
+  height: "100%",
+  gap: "10px",
 
   "&:hover": {
     transform: "translateY(-5px)",
   },
-
   variants: {
     darkMode: {
       true: { background: "#343a40" },
@@ -42,7 +44,6 @@ const Title = styled("h2", {
   fontSize: "1rem",
   marginBottom: "10px",
   color: "$primary",
-
   variants: {
     darkMode: {
       true: { color: "#fff" },
@@ -51,24 +52,27 @@ const Title = styled("h2", {
   },
 });
 
-// Beschreibung-Styling
+// Beschreibung-Styling mit Truncation (max. 3 Zeilen)
 const Description = styled("p", {
   fontSize: "0.85rem",
   marginBottom: "10px",
   color: "$secondary",
-
   variants: {
     darkMode: {
       true: { color: "#ccc" },
       false: { color: "$secondary" },
     },
   },
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
 });
 
 const NewsCard = ({ title, description, urlToImage, url }) => {
   const theme = useContext(ThemeContext);
 
-  // Falls theme nicht geladen ist (z. B. vor erstem Render), einen Fallback setzen
   if (!theme) {
     return null;
   }
