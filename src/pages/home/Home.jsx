@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
-import BreakingNews from "../../components/specific/breakingNews/breakingNews";
+// import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
+import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
@@ -147,7 +148,9 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
-        <BreakingNews news={news} />
+        {/* <BreakingNews news={news} /> */}
+
+        <BreakingNewsCarousel news={news} />
 
         <Footer />
       </Container>
