@@ -1,11 +1,9 @@
-// components/specific/theme/ChangeTheme.js
 import React, { useContext } from "react";
 import * as Switch from "@radix-ui/react-switch";
 import { styled } from "../../../styles/globalStyles";
 import { ThemeContext } from "../../../contexts/ThemeContext";
 import { Sun, Moon } from "lucide-react";
 
-// Wrapper für den Switch
 const SwitchWrapper = styled("div", {
   display: "flex",
   alignItems: "center",
@@ -13,7 +11,6 @@ const SwitchWrapper = styled("div", {
   cursor: "pointer",
 });
 
-// Radix UI Switch Styling
 const ThemeSwitch = styled(Switch.Root, {
   width: 42,
   height: 25,

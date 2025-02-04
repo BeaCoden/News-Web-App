@@ -4,7 +4,6 @@ import { styled } from "../../../styles/globalStyles";
 import * as Toggle from "@radix-ui/react-toggle";
 import { Linkedin, Github, BookOpen, Contact } from "lucide-react";
 
-// Footer Container
 const FooterContainer = styled("footer", {
   position: "fixed",
   bottom: "-80px",
@@ -28,7 +27,6 @@ const FooterContainer = styled("footer", {
   },
 });
 
-// Toggle Button für den Footer
 const ToggleButton = styled(Toggle.Root, {
   position: "fixed",
   bottom: "15px",
@@ -48,7 +46,6 @@ const ToggleButton = styled(Toggle.Root, {
   },
 });
 
-// Footer-Links
 const FooterLinks = styled("ul", {
   listStyle: "none",
   padding: 0,
@@ -73,7 +70,6 @@ const FooterLink = styled("a", {
   },
 });
 
-// Icon-Styling
 const Icon = styled("span", {
   fontSize: "1.2rem",
 });
@@ -87,14 +83,12 @@ const Footer = () => {
 
   return (
     <div>
-      {/* Footer Toggle Button */}
       <ToggleButton
         pressed={isFooterVisible}
         onPressedChange={toggleFooter}>
         {isFooterVisible ? "❌" : "ℹ️"}
       </ToggleButton>
 
-      {/* Footer Content */}
       <FooterContainer visible={isFooterVisible}>
         <p>
           <small>© 2024 by BeaCoden | All rights reserved</small>

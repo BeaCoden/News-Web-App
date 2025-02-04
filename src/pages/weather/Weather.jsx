@@ -2,7 +2,6 @@ import React from "react";
 import Footer from "../../components/common/footer/Footer";
 import { styled } from "../../styles/globalStyles";
 
-// **Container für die Wetter-Seite**
 const WeatherContainer = styled("div", {
   minHeight: "100vh",
   padding: "20px",
@@ -15,7 +14,6 @@ const WeatherContainer = styled("div", {
   transition: "background-color 0.3s ease, color 0.3s ease",
 });
 
-// **Styling für Wetteranzeige**
 const WeatherCard = styled("div", {
   backgroundColor: "var(--color-secondary)",
   padding: "20px",

@@ -5,7 +5,6 @@ import Spinner from "../../common/spinner/Spinner";
 import NewsCard from "../newsCard/NewsCard";
 import { styled } from "../../../styles/globalStyles";
 
-// **Gesamter Seiten-Container**
 const Container = styled("div", {
   padding: "20px",
   display: "flex",
@@ -17,7 +16,6 @@ const Container = styled("div", {
   gap: "20px",
 });
 
-// **News Grid Styling**
 const NewsGrid = styled("div", {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -25,7 +23,6 @@ const NewsGrid = styled("div", {
   width: "100%",
 });
 
-// **Wrapper für News-Bereich**
 const ContentWrapper = styled("div", {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -63,11 +60,10 @@ const LatestNews = () => {
       }
     };
     fetchNews();
-  }, [url]); // 🔹 `url` jetzt als Dependency hinzugefügt
+  }, [url]);
 
   return (
     <Container>
-      {/* 📌 Haupt-News-Bereich */}
       <h1>Latest News</h1>
       <ContentWrapper>
         <NewsGrid>

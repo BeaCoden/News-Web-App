@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { styled } from "../../../styles/globalStyles";
 
-// Container für die gesamte Seite
 const Container = styled("div", {
   display: "flex",
   flexDirection: "column",
@@ -15,7 +14,6 @@ const Container = styled("div", {
   backgroundColor: "$background",
 });
 
-// Box für den Inhalt
 const ConstructionContent = styled("div", {
   width: "90vw",
   maxWidth: "500px",
@@ -28,7 +26,6 @@ const ConstructionContent = styled("div", {
   position: "relative",
 });
 
-// Animationen für Icons
 const Visual = styled("div", {
   position: "relative",
   height: "100px",
@@ -38,7 +35,6 @@ const Visual = styled("div", {
   alignItems: "center",
 });
 
-// Hammer-Animation
 const Hammer = styled("div", {
   fontSize: "3rem",
   animation: "hammerSwing 2s infinite ease-in-out",
@@ -51,7 +47,6 @@ const Hammer = styled("div", {
   },
 });
 
-// Schrauben-Animation
 const Screw = styled("div", {
   position: "absolute",
   top: "-10px",
@@ -65,7 +60,6 @@ const Screw = styled("div", {
   },
 });
 
-// Schraubenschlüssel-Animation
 const Wrench = styled("div", {
   position: "absolute",
   bottom: "-10px",
@@ -79,7 +73,6 @@ const Wrench = styled("div", {
   },
 });
 
-// Titel
 const Title = styled("h4", {
   fontSize: "2rem",
   marginBottom: "10px",
@@ -88,7 +81,6 @@ const Title = styled("h4", {
   zIndex: 3,
 });
 
-// Beschreibungstext
 const Message = styled("p", {
   fontSize: "1rem",
   marginBottom: "20px",
@@ -97,7 +89,6 @@ const Message = styled("p", {
   zIndex: 3,
 });
 
-// Home-Link als Button
 const HomeLink = styled(Link, {
   display: "inline-block",
   marginTop: "20px",

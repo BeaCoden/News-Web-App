@@ -7,7 +7,6 @@ import ChangeTheme from "../../specific/theme/ChangeTheme";
 import newsEarth from "../../../assets/gifs/newsEarth.gif";
 import { routes } from "../../../routes/AppRouter";
 
-// Container für Logo und Titel
 const LogoContainer = styled("div", {
   display: "flex",
   alignItems: "center",
@@ -15,7 +14,6 @@ const LogoContainer = styled("div", {
   cursor: "pointer",
 });
 
-// Header Container
 const HeaderWrapper = styled("header", {
   display: "flex",
   justifyContent: "space-between",
@@ -28,7 +26,6 @@ const HeaderWrapper = styled("header", {
   position: "relative",
 });
 
-// Desktop Navigation – sichtbar ab 768px
 const MenuList = styled(NavigationMenu.List, {
   display: "flex",
   gap: "20px",
@@ -41,7 +38,6 @@ const MenuList = styled(NavigationMenu.List, {
   },
 });
 
-// Mobile Dropdown – nur unter 768px sichtbar
 const MobileDropdown = styled("div", {
   display: "none",
   "@media (max-width: 768px)": {
@@ -84,7 +80,6 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      {/* Logo und Titel */}
       <LogoContainer onClick={() => navigate("/")}>
         <img
           src={newsEarth}
@@ -94,7 +89,6 @@ const Header = () => {
         <h1>News</h1>
       </LogoContainer>
 
-      {/* Desktop Navigation */}
       <NavigationMenu.Root>
         <MenuList>
           {routes
@@ -112,7 +106,6 @@ const Header = () => {
         </MenuList>
       </NavigationMenu.Root>
 
-      {/* Mobile Dropdown Navigation */}
       <MobileDropdown>
         <DropdownMenu.Root>
           <DropdownTrigger>☰</DropdownTrigger>

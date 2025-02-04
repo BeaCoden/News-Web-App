@@ -5,7 +5,6 @@ import useFetchNews from "../../hooks/useFetchNews";
 import Spinner from "../../components/common/spinner/Spinner";
 import { styled } from "../../styles/globalStyles";
 
-// **Container für die Suchseite**
 const SearchContainer = styled("div", {
   minHeight: "100vh",
   padding: "20px",
@@ -17,14 +16,12 @@ const SearchContainer = styled("div", {
   transition: "background-color 0.3s ease, color 0.3s ease",
 });
 
-// **Suchergebnis-Überschrift**
 const Title = styled("h1", {
   fontSize: "2rem",
   color: "var(--color-primary)",
   marginBottom: "10px",
 });
 
-// **Styling für Nachrichtengrid**
 const NewsGrid = styled("div", {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -34,7 +31,6 @@ const NewsGrid = styled("div", {
   marginTop: "20px",
 });
 
-// **Fehlermeldungen & Hinweise**
 const MessageBox = styled("div", {
   backgroundColor: "var(--color-secondary)",
   padding: "15px",

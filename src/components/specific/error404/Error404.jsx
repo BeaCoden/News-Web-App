@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { styled, keyframes } from "../../../styles/globalStyles";
 
-// 🔥 Keyframe-Animationen für Rakete, Satellit & Erde
 const floatRocket = keyframes({
   "0%": { opacity: 0, transform: "translate(-100vw, 100vh) rotate(0deg)" },
   "15%": { opacity: 1 },
@@ -31,7 +30,6 @@ const fadeIn = keyframes({
   "100%": { opacity: 1 },
 });
 
-// 🚀 Container für die gesamte Seite
 const Container = styled("div", {
   display: "flex",
   flexDirection: "column",
@@ -44,7 +42,6 @@ const Container = styled("div", {
   overflowX: "hidden",
 });
 
-// 🛸 Box für den Fehler-Inhalt
 const ErrorContent = styled("div", {
   width: "90vw",
   maxWidth: "500px",
@@ -56,7 +53,6 @@ const ErrorContent = styled("div", {
   animation: `${fadeIn} 1s ease-in-out`,
 });
 
-// 🌌 Container für das visuelle Design (Zahlen, Icons)
 const ErrorVisual = styled("div", {
   position: "relative",
   height: "250px",
@@ -67,7 +63,6 @@ const ErrorVisual = styled("div", {
   overflow: "hidden",
 });
 
-// 🌙 Mond-Zwischenraum
 const Moon = styled("div", {
   width: "75px",
   height: "75px",
@@ -78,7 +73,6 @@ const Moon = styled("div", {
   zIndex: 1,
 });
 
-// ⭐ Sterne-Hintergrund
 const Stars = styled("div", {
   width: "100%",
   height: "100%",
@@ -89,7 +83,6 @@ const Stars = styled("div", {
   zIndex: 0,
 });
 
-// 🚀 Emoji-Styling mit Animationen
 const Emoji = styled("div", {
   position: "absolute",
   zIndex: 3,
@@ -105,7 +98,6 @@ const Emoji = styled("div", {
   },
 });
 
-// 🖋️ Titel und Nachricht
 const ErrorTitle = styled("h4", {
   fontSize: "1.5rem",
   marginBottom: "10px",
@@ -118,7 +110,6 @@ const ErrorMessage = styled("p", {
   color: "$font",
 });
 
-// 🌍 Home-Link als Button
 const HomeLink = styled(Link, {
   display: "inline-block",
   marginTop: "20px",

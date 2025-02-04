@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "../../../styles/globalStyles";
 
-// Container für den Spinner
 const SpinnerContainer = styled("div", {
   margin: "100px auto",
   width: "70px",
@@ -10,7 +9,6 @@ const SpinnerContainer = styled("div", {
   alignItems: "center",
 });
 
-// Einzelne Punkte im Spinner
 const Bounce = styled("div", {
   width: "18px",
   height: "18px",

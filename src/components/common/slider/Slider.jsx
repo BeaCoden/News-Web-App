@@ -7,7 +7,6 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { styled } from "../../../styles/globalStyles";
 import noImage from "../../../assets/img/noImage.jpg";
 
-// **Slider Container**
 const SliderContainer = styled("div", {
   width: "100%",
   maxWidth: "900px",
@@ -18,18 +17,15 @@ const SliderContainer = styled("div", {
   zIndex: 0,
 });
 
-// **Swiper-Styling**
 const StyledSwiper = styled(Swiper, {
   width: "100%",
 });
 
-// **Slide-Container**
 const Slide = styled("div", {
   position: "relative",
   overflow: "hidden",
 });
 
-// **Bild-Styling**
 const Image = styled("img", {
   width: "100%",
   height: "280px",
@@ -50,7 +46,6 @@ const Image = styled("img", {
   },
 });
 
-// **Text Overlay**
 const TextOverlay = styled("div", {
   position: "absolute",
   bottom: 0,
@@ -65,14 +60,12 @@ const TextOverlay = styled("div", {
   zIndex: 1,
 });
 
-// **Titel-Styling**
 const Title = styled("h3", {
   fontSize: "1rem",
   marginBottom: "8px",
   fontWeight: "bold",
 });
 
-// **Read More Button**
 const ReadMore = styled("a", {
   fontSize: "0.85rem",
   fontWeight: "bold",

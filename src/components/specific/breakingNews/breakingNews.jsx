@@ -1,21 +1,17 @@
-// components/specific/breakingNews/breakingNews.js
 import React, { useState, useEffect, useRef } from "react";
 import { styled } from "../../../styles/globalStyles";
 import NewsCard from "../newsCard/NewsCard";
 
-// Gesamt-Container für den Breaking-News-Bereich
 const SectionWrapper = styled("div", {
   width: "100%",
   padding: "20px 0",
   overflowX: "hidden",
 });
 
-// Überschrift
 const Title = styled("h2", {
   marginBottom: "20px",
 });
 
-// Grid-Container – responsives Layout: 1 Spalte (Smartphones), 2 Spalten (Tablets) und 4 Spalten (Laptops)
 const GridContainer = styled("div", {
   display: "grid",
   gridTemplateColumns: "repeat(1, 1fr)",
@@ -28,14 +24,12 @@ const GridContainer = styled("div", {
   },
 });
 
-// Wrapper für den Swipe-Effekt
 const AnimatedWrapper = styled("div", {
   transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
   transform: "translateX(80px)",
   opacity: 0,
 });
 
-// Komponente, die den Swipe-in-Effekt mittels Intersection Observer realisiert
 const AnimatedNewsCard = ({ article }) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);

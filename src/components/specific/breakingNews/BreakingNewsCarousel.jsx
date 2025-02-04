@@ -1,21 +1,18 @@
-// components/specific/breakingNews/BreakingNewsCarousel.js
 import React from "react";
-import { styled, keyframes } from "../../../styles/globalStyles"; // keyframes aus deinen globalen Styles
-import NewsCard from "../newsCard/NewsCard"; // passe den Pfad ggf. an
+import { styled, keyframes } from "../../../styles/globalStyles";
+import NewsCard from "../newsCard/NewsCard";
 
-// Keyframes: Der Container wird von 0 bis -50% animiert.
 const marquee = keyframes({
   "0%": { transform: "translateX(0)" },
   "100%": { transform: "translateX(-50%)" },
 });
 
-// CarouselWrapper: Umschließt das Carousel, blendet den Überlauf aus und fügt pseudo-Overlays hinzu.
 const CarouselWrapper = styled("div", {
   position: "relative",
   overflow: "hidden",
   width: "100%",
   padding: "20px 0",
-  // Pseudo-Element links: Gradient, der den linken Rand abdeckt (leicht geblurt)
+
   "&::before": {
     content: '""',
     position: "absolute",
@@ -27,7 +24,7 @@ const CarouselWrapper = styled("div", {
     pointerEvents: "none",
     zIndex: 2,
   },
-  // Pseudo-Element rechts: Gradient, der den rechten Rand abdeckt (leicht geblurt)
+
   "&::after": {
     content: '""',
     position: "absolute",
@@ -41,19 +38,16 @@ const CarouselWrapper = styled("div", {
   },
 });
 
-// Überschrift für den Carousel-Bereich
 const CarouselHeading = styled("h2", {
   textAlign: "center",
   marginBottom: "10px",
   fontSize: "1.5rem",
 });
 
-// CarouselContent: Enthält alle Items, hat einen definierten Gap und läuft per Keyframe-Animation.
-// Durch animationDirection: "reverse" scrollt er von links nach rechts.
 const CarouselContent = styled("div", {
   display: "flex",
-  gap: "20px", // Abstand zwischen den Items
-  width: "200%", // Da wir die News duplizieren
+  gap: "20px",
+  width: "200%",
   animation: `${marquee} 20s linear infinite`,
   animationDirection: "reverse",
   "&:hover": {
@@ -61,24 +55,21 @@ const CarouselContent = styled("div", {
   },
 });
 
-// Jedes Carousel-Item (flex-basiert)
 const CarouselItem = styled("div", {
   flex: "0 0 auto",
 });
 
-// Wrapper, der die NewsCard in eine fixe, responsive Breite setzt.
 const ItemWrapper = styled("div", {
-  width: "300px", // Standard: Smartphones
+  width: "300px",
   "@media (min-width: 768px)": {
-    width: "400px", // Tablets
+    width: "400px",
   },
   "@media (min-width: 1024px)": {
-    width: "500px", // Laptops und größere
+    width: "500px",
   },
 });
 
 const BreakingNewsCarousel = ({ news }) => {
-  // Dupliziere die News-Daten, damit der Übergang nahtlos wirkt.
   const duplicatedNews = [...news, ...news];
 
   return (

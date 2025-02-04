@@ -4,7 +4,7 @@ export const { styled, globalCss, keyframes } = createStitches({});
 
 export const globalStyles = globalCss({
   //TODO - Farben global anpassen (Light/Dark Mode)
-  /* Standardwerte (Light Mode) */
+  /* Light Mode */
   ":root": {
     "--color-primary": "#435585",
     "--color-secondary": "#818fb4",
@@ -15,7 +15,7 @@ export const globalStyles = globalCss({
     "--color-info": "#6c8ea3",
   },
 
-  /* Überschreiben der Variablen für den Dark Mode */
+  /* Dark Mode */
   'html[data-theme="dark"]': {
     "--color-primary": "#1e3a5f",
     "--color-secondary": "#415a80",
