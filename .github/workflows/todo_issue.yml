@@ -1,0 +1,34 @@
+name: Create TODO Issues
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  create-todo-issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Find TODO Comments
+        id: find-todos
+        run: |
+          TODO_COMMENTS=$(grep -rIn --exclude-dir={node_modules,.git,.github} -E "//TODO|todo" . || true)
+          echo "$TODO_COMMENTS" > todos.txt
+          echo "TODO_COMMENTS<<EOF" >> $GITHUB_ENV
+          echo "$TODO_COMMENTS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create GitHub Issues
+        if: env.TODO_COMMENTS != ''
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "TODO gefunden: Commit ${{ github.sha }}"
+          content-filepath: todos.txt
+          labels: "todo, automation"
+          token: ${{ secrets.GITHUB_TOKEN }}
