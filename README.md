@@ -13,7 +13,7 @@ Developed as part of a Udemy course, this project provides a simple way to retri
 - Top News: Retrieve and display the latest news via NewsAPI.
 - Search News: Search for news articles by keyword.
 - Load and Update News: Users can manually load and update news.
-- Responsive Design: Clean and responsive design that works well on all screen sizes. Radix UI is used for styling.
+- Responsive Design: Clean and responsive design that works well on all screen sizes. 
 
 ## Getting Started with Create React App
 
