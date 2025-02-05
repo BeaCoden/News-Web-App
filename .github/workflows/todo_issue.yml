@@ -7,6 +7,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  issues: write # Erlaubt das Erstellen von Issues
+  contents: read # Erlaubt das Lesen des Repos
+
 jobs:
   create-todo-issues:
     runs-on: ubuntu-latest
