@@ -8,8 +8,8 @@ on:
     types: [opened, synchronize, reopened]
 
 permissions:
-  issues: write # Erlaubt das Erstellen von Issues
-  contents: read # Erlaubt das Lesen des Repos
+  issues: write
+  contents: read
 
 jobs:
   create-todo-issues:
@@ -24,12 +24,10 @@ jobs:
         run: |
           TODO_COMMENTS=$(grep -rIn --exclude-dir={node_modules,.git,.github} -E "//TODO|todo" . || true)
           echo "$TODO_COMMENTS" > todos.txt
-          echo "TODO_COMMENTS<<EOF" >> $GITHUB_ENV
-          echo "$TODO_COMMENTS" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          echo "::set-output name=todo_comments::$TODO_COMMENTS"
 
       - name: Create GitHub Issues
-        if: env.TODO_COMMENTS != ''
+        if: steps.find-todos.outputs.todo_comments != ''
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: "TODO gefunden: Commit ${{ github.sha }}"
