@@ -8,8 +8,7 @@ Developed as part of a Udemy course, this project provides a simple way to retri
 
 ## 🔗 Demo
 
-![image](https://github.com/user-attachments/assets/2d06d02b-6bb2-4c9d-9d0a-22657e32f290)
-
+![DemoImg](https://github.com/user-attachments/assets/6c6f383c-b439-4f4c-b1a0-a4751d031aea)
 
 ## 🚀 Features
 
