@@ -8,6 +8,9 @@ Developed as part of a Udemy course, this project provides a simple way to retri
 
 ## 🔗 Demo
 
+![image](https://github.com/user-attachments/assets/2d06d02b-6bb2-4c9d-9d0a-22657e32f290)
+
+
 ## 🚀 Features
 
 - Top News: Retrieve and display the latest news via NewsAPI.
