@@ -15,7 +15,7 @@ const Title = styled("h1", {
   color: "var(--color-primary)",
 });
 
-//TODO - Kategorien für die News hinzufügen (z. B. Sport, Politik, Wirtschaft, etc.)
+//FIXME - Kategorien für die News hinzufügen (z. B. Sport, Politik, Wirtschaft, etc.)
 const Category = () => {
   return (
     <CategoryContainer>

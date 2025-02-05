@@ -15,7 +15,7 @@ const Title = styled("h1", {
   color: "var(--color-primary)",
 });
 
-//TODO - Einstellungen für den User hinzufügen (z. B. Dark Mode, Sprache, etc.)
+//FIXME - Einstellungen für den User hinzufügen (z. B. Dark Mode, Sprache, etc.)
 const Settings = () => {
   return (
     <SettingsContainer>

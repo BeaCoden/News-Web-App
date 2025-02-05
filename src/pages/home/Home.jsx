@@ -146,7 +146,7 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
-        {/* //TODO - Carousel anstelle von bisheriger animierter Komponente */}
+        {/* //FIXME - Carousel anstelle von bisheriger animierter Komponente */}
         <BreakingNews news={news} />
 
         <Footer />

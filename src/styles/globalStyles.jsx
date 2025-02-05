@@ -3,7 +3,7 @@ import { createStitches } from "@stitches/react";
 export const { styled, globalCss, keyframes } = createStitches({});
 
 export const globalStyles = globalCss({
-  //TODO - Farben global anpassen (Light/Dark Mode)
+  //FIXME - Farben global anpassen (Light/Dark Mode)
   /* Light Mode */
   ":root": {
     "--color-primary": "#435585",

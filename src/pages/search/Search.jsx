@@ -61,7 +61,7 @@ const Button = styled("button", {
   },
 });
 
-//TODO - Suchseite Design und Funktionalität verbessern (Ladeanimation, Fehlermeldungen, Filter, Nachrichten anzeigen)
+//FIXME - Suchseite Design und Funktionalität verbessern (Ladeanimation, Fehlermeldungen, Filter, Nachrichten anzeigen)
 const Search = () => {
   const { state } = useLocation();
   const [loading, setLoading] = useState(true);
