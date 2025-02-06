@@ -2,59 +2,58 @@ import React from "react";
 import { styled, keyframes } from "../../../styles/globalStyles";
 import NewsCard from "../newsCard/NewsCard";
 
+/* 🚀 Animations-Logik für fließenden, endlosen Lauf */
 const marquee = keyframes({
-  "0%": { transform: "translateX(0)" },
-  "100%": { transform: "translateX(-50%)" },
+  "0%": { transform: "translateX(0%)" },
+  "100%": { transform: "translateX(-100%)" },
 });
 
+/* Wrapper für das gesamte Carousel */
 const CarouselWrapper = styled("div", {
   position: "relative",
   overflow: "hidden",
   width: "100%",
-  padding: "20px 0",
-
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    left: 0,
-    top: 0,
-    width: "10%",
-    height: "100%",
-    background: "linear-gradient(to right, rgba(0,0,0,0.8), transparent)",
-    pointerEvents: "none",
-    zIndex: 2,
-  },
-
-  "&::after": {
-    content: '""',
-    position: "absolute",
-    right: 0,
-    top: 0,
-    width: "10%",
-    height: "100%",
-    background: "linear-gradient(to left, rgba(0,0,0,0.8), transparent)",
-    pointerEvents: "none",
-    zIndex: 2,
-  },
+  margin: "0",
 });
 
-const CarouselHeading = styled("h2", {
-  textAlign: "center",
-  marginBottom: "10px",
-  fontSize: "1.5rem",
-});
-
-const CarouselContent = styled("div", {
+/* 🔥 Endlos animierter Breaking News Text */
+const MarqueeContainer = styled("div", {
+  width: "100%",
+  overflow: "hidden",
+  backgroundColor: "var(--color-secondary)",
+  padding: "10px 0",
+  position: "relative",
   display: "flex",
-  gap: "20px",
-  width: "200%",
+  whiteSpace: "nowrap",
+});
+
+const MarqueeText = styled("div", {
+  display: "flex",
+  gap: "50px",
+  fontSize: "1.5rem",
+  fontWeight: "bold",
+  color: "#FF4500",
   animation: `${marquee} 20s linear infinite`,
-  animationDirection: "reverse",
+  flexShrink: 0,
   "&:hover": {
     animationPlayState: "paused",
   },
 });
 
+/* 🚀 Nahtlos animierter Carousel-Container */
+const CarouselContent = styled("div", {
+  display: "flex",
+  flexWrap: "nowrap",
+  width: "max-content",
+  animation: `${marquee} 50s linear infinite`,
+  "&:hover": {
+    animationPlayState: "paused",
+  },
+  gap: "25px",
+  marginTop: "5px",
+});
+
+/* Einzelne News-Kacheln */
 const CarouselItem = styled("div", {
   flex: "0 0 auto",
 });
@@ -70,11 +69,19 @@ const ItemWrapper = styled("div", {
 });
 
 const BreakingNewsCarousel = ({ news }) => {
+  /* 🔄 Verdoppelung der Inhalte für eine nahtlose Endlos-Animation */
   const duplicatedNews = [...news, ...news];
 
   return (
     <CarouselWrapper>
-      <CarouselHeading>🔥 Breaking News</CarouselHeading>
+      {/* 🔥 Animierter Text für Breaking News */}
+      <MarqueeContainer>
+        <MarqueeText>🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥</MarqueeText>
+        {/* ❗ Verdoppelt für nahtlose Animation */}
+        <MarqueeText>Breaking News 🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥</MarqueeText>
+      </MarqueeContainer>
+
+      {/* 📰 Animiertes News Carousel */}
       <CarouselContent>
         {duplicatedNews.map((article, index) => (
           <CarouselItem key={index}>
