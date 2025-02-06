@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
-import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
+// import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
+import LatestNews from "../../components/specific/latestNews/latestNews";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
+import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
 
 const BackgroundVideo = styled("video", {
   position: "fixed",
@@ -17,7 +19,6 @@ const BackgroundVideo = styled("video", {
 });
 
 const HomeContainer = styled("div", {
-  padding: "20px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -146,9 +147,9 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
-        {/* //FIXME - Carousel anstelle von bisheriger animierter Komponente */}
-        <BreakingNews news={news} />
-
+        {/* <BreakingNews news={news} /> */}
+        <BreakingNewsCarousel news={news} />
+        <LatestNews />
         <Footer />
       </HomeContainer>
     </>
