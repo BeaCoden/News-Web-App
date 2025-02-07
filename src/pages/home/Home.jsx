@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
-// import BreakingNews from "../../components/specific/breakingNews/BreakingNews";
-import LatestNews from "../../components/specific/latestNews/latestNews";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
 import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
+import LatestNews from "../../components/specific/latestNews/LatestNews";
 
 const BackgroundVideo = styled("video", {
   position: "fixed",
