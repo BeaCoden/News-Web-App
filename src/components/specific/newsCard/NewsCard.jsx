@@ -1,5 +1,4 @@
-// components/common/newsCard/NewsCard.js
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { styled } from "../../../styles/globalStyles";
 import noImage from "../../../assets/img/noImage.jpg";
 import { ThemeContext } from "../../../contexts/ThemeContext";

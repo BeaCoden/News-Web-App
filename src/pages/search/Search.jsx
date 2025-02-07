@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import NewsCard from "../../components/specific/newsCard/NewsCard";
 import useFetchNews from "../../hooks/useFetchNews";

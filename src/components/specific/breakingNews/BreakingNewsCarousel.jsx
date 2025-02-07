@@ -1,14 +1,11 @@
-import React from "react";
 import { styled, keyframes } from "../../../styles/globalStyles";
 import NewsCard from "../newsCard/NewsCard";
 
-/* 🚀 Animations-Logik für fließenden, endlosen Lauf */
 const marquee = keyframes({
   "0%": { transform: "translateX(0%)" },
   "100%": { transform: "translateX(-100%)" },
 });
 
-/* Wrapper für das gesamte Carousel */
 const CarouselWrapper = styled("div", {
   position: "relative",
   overflow: "hidden",
@@ -16,7 +13,6 @@ const CarouselWrapper = styled("div", {
   margin: "0",
 });
 
-/* 🔥 Endlos animierter Breaking News Text */
 const MarqueeContainer = styled("div", {
   width: "100%",
   overflow: "hidden",
@@ -40,7 +36,6 @@ const MarqueeText = styled("div", {
   },
 });
 
-/* 🚀 Nahtlos animierter Carousel-Container */
 const CarouselContent = styled("div", {
   display: "flex",
   flexWrap: "nowrap",
@@ -53,7 +48,6 @@ const CarouselContent = styled("div", {
   marginTop: "5px",
 });
 
-/* Einzelne News-Kacheln */
 const CarouselItem = styled("div", {
   flex: "0 0 auto",
 });
@@ -69,19 +63,15 @@ const ItemWrapper = styled("div", {
 });
 
 const BreakingNewsCarousel = ({ news }) => {
-  /* 🔄 Verdoppelung der Inhalte für eine nahtlose Endlos-Animation */
   const duplicatedNews = [...news, ...news];
 
   return (
     <CarouselWrapper>
-      {/* 🔥 Animierter Text für Breaking News */}
       <MarqueeContainer>
         <MarqueeText>🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥</MarqueeText>
-        {/* ❗ Verdoppelt für nahtlose Animation */}
         <MarqueeText>Breaking News 🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥</MarqueeText>
       </MarqueeContainer>
 
-      {/* 📰 Animiertes News Carousel */}
       <CarouselContent>
         {duplicatedNews.map((article, index) => (
           <CarouselItem key={index}>

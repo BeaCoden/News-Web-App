@@ -1,11 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../../routes/AppRouter";
+import { styled } from "../../../styles/globalStyles";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { styled } from "../../../styles/globalStyles";
 import ChangeTheme from "../../specific/theme/ChangeTheme";
 import newsEarth from "../../../assets/gifs/newsEarth.gif";
-import { routes } from "../../../routes/AppRouter";
 
 const LogoContainer = styled("div", {
   display: "flex",

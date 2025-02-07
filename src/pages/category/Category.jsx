@@ -1,4 +1,3 @@
-import React from "react";
 import Footer from "../../components/common/footer/Footer";
 import { styled } from "../../styles/globalStyles";
 

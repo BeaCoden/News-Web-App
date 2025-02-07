@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
+import Spinner from "../../components/common/spinner/Spinner";
 import { styled } from "../../styles/globalStyles";
 import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
-import BreakingNewsCarousel from "../../components/specific/breakingNews/BreakingNewsCarousel";
-import LatestNews from "../../components/specific/latestNews/LatestNews";
+
+const LatestNews = lazy(() => import("../../components/specific/latestNews/LatestNews"));
+const BreakingNewsCarousel = lazy(() => import("../../components/specific/breakingNews/BreakingNewsCarousel"));
 
 const BackgroundVideo = styled("video", {
   position: "fixed",
@@ -146,9 +148,15 @@ const Home = () => {
           </SearchButton>
         </SearchContainer>
 
-        {/* <BreakingNews news={news} /> */}
-        <BreakingNewsCarousel news={news} />
-        <LatestNews />
+        <Suspense
+          fallback={
+            <div style={{ margin: "100px auto" }}>
+              <Spinner />
+            </div>
+          }>
+          <BreakingNewsCarousel news={news} />
+          <LatestNews />
+        </Suspense>
         <Footer />
       </HomeContainer>
     </>

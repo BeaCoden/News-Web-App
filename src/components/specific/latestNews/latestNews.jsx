@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../common/footer/Footer";
 import NewsCard from "../newsCard/NewsCard";
 import { styled } from "../../../styles/globalStyles";
-import { motion } from "framer-motion"; // 🚀 Framer Motion für Animationen
+import { motion } from "framer-motion";
 
 const Container = styled("div", {
   padding: "20px",
@@ -16,12 +16,11 @@ const Container = styled("div", {
   gap: "20px",
 });
 
-/* Animation für das schrittweise Erscheinen */
 const newsContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.3 }, // Verzögerung für sanftes Laden
+    transition: { staggerChildren: 0.3 },
   },
 };
 
@@ -30,7 +29,6 @@ const newsItemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-/* 📐 2-Spalten-Grid für Latest News */
 const NewsGrid = styled(motion.div, {
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
@@ -42,7 +40,6 @@ const NewsGrid = styled(motion.div, {
   },
 });
 
-/* 🚀 Skeleton Loader für News Cards */
 const SkeletonCard = styled(motion.div, {
   width: "100%",
   height: "250px",

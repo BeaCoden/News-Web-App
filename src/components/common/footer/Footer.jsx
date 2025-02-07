@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { styled } from "../../../styles/globalStyles";
 import * as Toggle from "@radix-ui/react-toggle";
 import { Linkedin, Github, BookOpen, Contact } from "lucide-react";
