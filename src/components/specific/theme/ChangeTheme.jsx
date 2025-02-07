@@ -53,11 +53,12 @@ const ChangeTheme = () => {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   return (
-    <SwitchWrapper onClick={() => setDarkMode(!darkMode)}>
+    <SwitchWrapper>
       <ThemeIcon>{darkMode ? <Moon size={20} /> : <Sun size={20} />}</ThemeIcon>
       <ThemeSwitch
         checked={darkMode}
-        onCheckedChange={setDarkMode}>
+        onCheckedChange={(checked) => setDarkMode(checked)}
+        aria-label="Toggle Theme">
         <ThemeThumb />
       </ThemeSwitch>
     </SwitchWrapper>
