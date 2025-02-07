@@ -9,7 +9,7 @@ globalStyles();
 
 const App = () => (
   <ThemeProvider>
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AppRouter />
     </BrowserRouter>
   </ThemeProvider>
