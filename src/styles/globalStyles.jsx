@@ -37,4 +37,13 @@ export const globalStyles = globalCss({
     display: "flex",
     flexDirection: "column",
   },
+
+  "@media (min-width: 1920px)": {
+    HomeContainer: {
+      maxWidth: "95%",
+    },
+    BreakingNewsCarousel: {
+      justifyContent: "flex-start",
+    },
+  },
 });
