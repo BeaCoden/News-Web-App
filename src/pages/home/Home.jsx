@@ -17,6 +17,15 @@ const BackgroundVideo = styled("video", {
   height: "100vh",
   objectFit: "cover",
   zIndex: -1,
+  "@media (max-width: 599px)": {
+    objectFit: "cover",
+  },
+  "@media (min-width: 600px) and (max-width: 1199px)": {
+    objectFit: "cover",
+  },
+  "@media (min-width: 1200px)": {
+    objectFit: "cover",
+  },
 });
 
 const HomeContainer = styled("div", {

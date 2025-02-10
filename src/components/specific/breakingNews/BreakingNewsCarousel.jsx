@@ -11,36 +11,15 @@ const CarouselWrapper = styled("div", {
   overflow: "hidden",
   width: "100%",
   margin: "0",
-});
-
-const MarqueeContainer = styled("div", {
-  width: "100%",
-  overflow: "hidden",
+  paddingBottom: "15px",
   backgroundColor: "var(--color-secondary)",
-  padding: "10px 0",
-  position: "relative",
-  display: "flex",
-  whiteSpace: "nowrap",
-});
-
-const MarqueeText = styled("div", {
-  display: "flex",
-  gap: "50px",
-  fontSize: "1.5rem",
-  fontWeight: "bold",
-  color: "#FF4500",
-  animation: `${marquee} 20s linear infinite`,
-  flexShrink: 0,
-  "&:hover": {
-    animationPlayState: "paused",
-  },
 });
 
 const CarouselContent = styled("div", {
   display: "flex",
   flexWrap: "nowrap",
   width: "max-content",
-  animation: `${marquee} 50s linear infinite`,
+  animation: `${marquee} 70s linear infinite`,
   "&:hover": {
     animationPlayState: "paused",
   },
@@ -50,6 +29,23 @@ const CarouselContent = styled("div", {
 
 const CarouselItem = styled("div", {
   flex: "0 0 auto",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "5px",
+  borderRadius: "10px",
+  backgroundColor: "var(--color-primary)",
+  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+  transition: "transform 0.3s ease",
+  "&:hover": {
+    transform: "scale(1.05)",
+  },
+  "@media (min-width: 768px)": {
+    padding: "10px",
+  },
+  "@media (min-width: 1024px)": {
+    padding: "15px",
+  },
 });
 
 const ItemWrapper = styled("div", {
@@ -62,28 +58,49 @@ const ItemWrapper = styled("div", {
   },
 });
 
+const blink = keyframes({
+  "0%, 100%": { opacity: 0 },
+  "50%": { opacity: 1 },
+});
+
+const CarouselTitle = styled("h2", {
+  color: "$white",
+  fontSize: "1.2rem",
+  fontWeight: "bold",
+  fontStyle: "italic",
+  letterSpacing: "4px",
+  textAlign: "center",
+  paddingTop: "2px",
+  marginBottom: "5px",
+  animation: `${blink} 2s ease-in-out infinite`,
+  "@media (min-width: 768px)": {
+    fontSize: "1.5rem",
+  },
+  "@media (min-width: 1024px)": {
+    fontSize: "1.8rem",
+  },
+});
+
 const BreakingNewsCarousel = ({ news }) => {
   const duplicatedNews = [...news, ...news];
 
   return (
     <CarouselWrapper>
-      <MarqueeContainer>
-        <MarqueeText>🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥</MarqueeText>
-        <MarqueeText>Breaking News 🔥 Breaking News 🔥 Breaking News 🔥 Breaking News 🔥</MarqueeText>
-      </MarqueeContainer>
-
       <CarouselContent>
         {duplicatedNews.map((article, index) => (
-          <CarouselItem key={index}>
-            <ItemWrapper>
-              <NewsCard
-                title={article.title}
-                description={article.description}
-                urlToImage={article.urlToImage}
-                url={article.url}
-              />
-            </ItemWrapper>
-          </CarouselItem>
+          <div key={index}>
+            <CarouselTitle>Breaking News</CarouselTitle>
+            <CarouselItem>
+              <ItemWrapper>
+                <NewsCard
+                  title={article.title}
+                  description={article.description}
+                  urlToImage={article.urlToImage}
+                  url={article.url}
+                />
+              </ItemWrapper>
+            </CarouselItem>
+          </div>
         ))}
       </CarouselContent>
     </CarouselWrapper>
