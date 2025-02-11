@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../../components/specific/newsCard/NewsCard";
 import Footer from "../../components/common/footer/Footer";
+import OnBuild from "../../components/specific/onBuild/OnBuild";
 import axios from "axios";
 import { styled } from "../../styles/globalStyles";
-import { motion } from "framer-motion";
-import { Search, ChevronDown } from "lucide-react";
+import { Search } from "lucide-react";
 import Spinner from "../../components/common/spinner/Spinner";
 import Button from "../../components/common/button/Button";
 
@@ -131,12 +131,15 @@ const NewsGrid = styled("div", {
   },
 });
 
-function Categories() {
+const resetTime = Date.now() + 21 * 60 * 60 * 1000 + 46 * 60 * 1000 + 27 * 1000; // Sekundengenau
+
+const Categories = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("publishedAt");
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(false);
 
   const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -186,8 +189,8 @@ function Categories() {
 
   return (
     <CategoryContainer>
+      {apiError && <OnBuild resetTime={resetTime} />} {/* apiError fix */}
       <Title>Categories</Title>
-
       <ControlsWrapper>
         <SearchContainer>
           <SearchInput
@@ -227,7 +230,6 @@ function Categories() {
           </FilterContainer>
         )}
       </ControlsWrapper>
-
       <FilterContainer>
         {categories.map((cat) => (
           <Button
@@ -238,9 +240,7 @@ function Categories() {
           </Button>
         ))}
       </FilterContainer>
-
       {loading && <Spinner />}
-
       {!loading && (
         <NewsGrid>
           {articles.map((article, index) => (
@@ -251,10 +251,9 @@ function Categories() {
           ))}
         </NewsGrid>
       )}
-
       <Footer />
     </CategoryContainer>
   );
-}
+};
 
 export default Categories;
