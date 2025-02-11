@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "../../styles/globalStyles";
 import NewsCard from "../../components/specific/newsCard/NewsCard";
-import axios from "axios";
-import { motion } from "framer-motion";
 import Footer from "../../components/common/footer/Footer";
+import axios from "axios";
+import { styled } from "../../styles/globalStyles";
+import { motion } from "framer-motion";
+import { Search, ChevronDown } from "lucide-react";
+import Spinner from "../../components/common/spinner/Spinner";
+import Button from "../../components/common/button/Button";
 
 const filterOptions = [
-  { id: "popular", label: "popularity", sortBy: "popularity" },
-  { id: "relevancy", label: "relevancy", sortBy: "relevancy" },
-  { id: "latest", label: "latest", sortBy: "publishedAt" },
+  { id: "publishedAt", label: "Latest", sortBy: "publishedAt" },
+  { id: "popularity", label: "Popularity", sortBy: "popularity" },
+  { id: "relevancy", label: "Relevancy", sortBy: "relevancy" },
+];
+
+const categories = [
+  { id: "", label: "All" },
+  { id: "business", label: "Business" },
+  { id: "entertainment", label: "Entertainment" },
+  { id: "general", label: "General" },
+  { id: "health", label: "Health" },
+  { id: "science", label: "Science" },
+  { id: "sports", label: "Sports" },
+  { id: "technology", label: "Technology" },
 ];
 
 const CategoryContainer = styled("div", {
+  width: "100vw",
+  minHeight: "100vh",
   margin: "auto",
   padding: "20px",
   backgroundColor: "var(--color-background)",
@@ -29,49 +45,76 @@ const ControlsWrapper = styled("div", {
   flexDirection: "column",
   gap: "1rem",
   marginBottom: "20px",
-  "@media(min-width: 768px)": {
+  "@media(min-width: 1024px)": {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
 });
 
-const SearchInput = styled("input", {
-  padding: "0.6rem 1rem",
-  border: "2px solid var(--color-font)",
-  borderRadius: "4px",
-  fontSize: "1rem",
+const SearchContainer = styled("div", {
   width: "100%",
-  "@media(min-width: 768px)": {
-    width: "300px",
+  maxWidth: "600px",
+  display: "flex",
+  alignItems: "center",
+  border: "2px solid var(--color-primary)",
+  borderRadius: "5px",
+  overflow: "hidden",
+  backgroundColor: "var(--color-background)",
+  transition: "border 0.3s ease, box-shadow 0.3s ease",
+  "&:focus-within": {
+    border: "2px solid var(--color-buttonHover)",
+    boxShadow: "0px 0px 8px var(--color-buttonHover)",
   },
+});
+
+const SearchInput = styled("input", {
+  flex: 1,
+  padding: "10px",
+  fontSize: "1rem",
+  color: "var(--color-font)",
+  backgroundColor: "var(--color-background)",
+  border: "none",
+  outline: "none",
+  "&::placeholder": {
+    color: "var(--color-secondary)",
+  },
+});
+
+const SearchButton = styled(Button, {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "10px",
 });
 
 const FilterContainer = styled("div", {
   display: "flex",
-  flexWrap: "wrap",
+  flexWrap: "nowrap",
   gap: "0.5rem",
+  overflowX: "auto",
+  paddingBottom: "5px",
+  "&::-webkit-scrollbar": {
+    height: "4px",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    background: "var(--color-buttonHover)",
+    borderRadius: "4px",
+  },
 });
 
-const FilterButton = styled(motion.button, {
+const Dropdown = styled("select", {
+  padding: "10px",
+  fontSize: "1rem",
   border: "2px solid var(--color-button)",
-  backgroundColor: "transparent",
+  borderRadius: "5px",
+  backgroundColor: "var(--color-background)",
   color: "var(--color-font)",
-  borderRadius: "4px",
-  padding: "0.5rem 1rem",
   cursor: "pointer",
-  transition: "all 0.2s ease",
+  transition: "all 0.3s ease",
   "&:hover": {
     backgroundColor: "var(--color-secondary)",
     color: "#fff",
-  },
-  variants: {
-    active: {
-      true: {
-        backgroundColor: "var(--color-button)",
-        color: "#fff",
-      },
-    },
   },
 });
 
@@ -80,7 +123,6 @@ const NewsGrid = styled("div", {
   gridTemplateColumns: "1fr",
   gap: "20px",
   marginBottom: "50px",
-
   "@media (min-width: 768px)": {
     gridTemplateColumns: "repeat(2, 1fr)",
   },
@@ -92,39 +134,34 @@ const NewsGrid = styled("div", {
 function Categories() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("popularity");
+  const [selectedFilter, setSelectedFilter] = useState("publishedAt");
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const apiKey = process.env.REACT_APP_API_KEY;
 
+  const buildNewsApiUrl = () => {
+    let baseUrl = "https://newsapi.org/v2/";
+    baseUrl += searchQuery.trim().length === 0 ? "top-headlines" : "everything";
+
+    const params = new URLSearchParams();
+    params.set("apiKey", apiKey);
+    if (selectedCategory && searchQuery.trim().length === 0) params.set("category", selectedCategory);
+    if (searchQuery.trim().length === 0) params.set("country", "us");
+    if (searchQuery.trim().length > 0) params.set("q", searchQuery.trim());
+    if (baseUrl.includes("everything")) params.set("sortBy", selectedFilter);
+
+    return `${baseUrl}?${params.toString()}`;
+  };
+
   const fetchArticles = async () => {
     try {
       setLoading(true);
-
-      let endpoint = "";
-      const params = { apiKey: apiKey };
-
-      if (searchQuery) {
-        endpoint = "https://newsapi.org/v2/everything";
-        params.q = searchQuery;
-        params.sortBy = selectedFilter;
-      } else {
-        endpoint = "https://newsapi.org/v2/top-headlines";
-        params.country = "us";
-        if (selectedCategory) {
-          params.category = selectedCategory;
-        }
-      }
-
-      const response = await axios.get(endpoint, { params });
-      if (response.data && response.data.articles) {
-        setArticles(response.data.articles);
-      } else {
-        setArticles([]);
-      }
+      const finalUrl = buildNewsApiUrl();
+      const response = await axios.get(finalUrl);
+      setArticles(response.data.articles || []);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error fetching articles:", error);
       setArticles([]);
     } finally {
       setLoading(false);
@@ -133,96 +170,88 @@ function Categories() {
 
   useEffect(() => {
     fetchArticles();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory, selectedFilter]);
 
   useEffect(() => {
-    if (searchQuery.length > 2) {
+    if (searchQuery.trim().length > 2) {
       const delayDebounce = setTimeout(() => {
         fetchArticles();
       }, 600);
       return () => clearTimeout(delayDebounce);
     }
-    if (searchQuery.length === 0) {
+    if (searchQuery.trim().length === 0) {
       fetchArticles();
     }
   }, [searchQuery]);
 
-  const handleFilterClick = (sortId) => {
-    setSelectedFilter(sortId);
-  };
-
   return (
     <CategoryContainer>
       <Title>Categories</Title>
-      <ControlsWrapper>
-        <SearchInput
-          type="text"
-          placeholder="Search news..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
 
-        <FilterContainer>
-          {filterOptions.map((f) => (
-            <FilterButton
-              key={f.id}
-              onClick={() => handleFilterClick(f.sortBy)}
-              active={selectedFilter === f.sortBy ? true : false}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}>
-              {f.label}
-            </FilterButton>
-          ))}
-        </FilterContainer>
+      <ControlsWrapper>
+        <SearchContainer>
+          <SearchInput
+            type="text"
+            placeholder="Search in headlines..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <SearchButton onClick={fetchArticles}>
+            <Search />
+          </SearchButton>
+        </SearchContainer>
+
+        {/* Filter als Dropdown auf kleinen Screens, Buttons ab 1024px */}
+        {window.innerWidth < 1024 ? (
+          <Dropdown
+            value={selectedFilter}
+            onChange={(e) => setSelectedFilter(e.target.value)}>
+            {filterOptions.map((f) => (
+              <option
+                key={f.id}
+                value={f.sortBy}>
+                {f.label}
+              </option>
+            ))}
+          </Dropdown>
+        ) : (
+          <FilterContainer>
+            {filterOptions.map((f) => (
+              <Button
+                key={f.id}
+                onClick={() => setSelectedFilter(f.sortBy)}
+                active={selectedFilter === f.sortBy}>
+                {f.label}
+              </Button>
+            ))}
+          </FilterContainer>
+        )}
       </ControlsWrapper>
 
-      <div style={{ marginBottom: "20px" }}>
-        <br />
-        <FilterContainer style={{ marginTop: "0.5rem" }}>
-          {[
-            { id: "business", label: "Business" },
-            { id: "entertainment", label: "Entertainment" },
-            { id: "general", label: "General" },
-            { id: "health", label: "Health" },
-            { id: "science", label: "Science" },
-            { id: "sports", label: "Sports" },
-            { id: "technology", label: "Technology" },
-          ].map((cat) => (
-            <FilterButton
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              active={selectedCategory === cat.id ? true : false}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}>
-              {cat.label}
-            </FilterButton>
-          ))}
-        </FilterContainer>
-      </div>
+      <FilterContainer>
+        {categories.map((cat) => (
+          <Button
+            key={cat.id}
+            onClick={() => setSelectedCategory(cat.id)}
+            active={selectedCategory === cat.id}>
+            {cat.label}
+          </Button>
+        ))}
+      </FilterContainer>
 
-      {loading && <p>Loading News</p>}
+      {loading && <Spinner />}
 
       {!loading && (
         <NewsGrid>
           {articles.map((article, index) => (
-            <motion.div
+            <NewsCard
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.03 }}>
-              <NewsCard
-                title={article.title}
-                description={article.description}
-                urlToImage={article.urlToImage}
-                url={article.url}
-              />
-            </motion.div>
+              {...article}
+            />
           ))}
         </NewsGrid>
       )}
 
-      {!loading && articles.length === 0 && <p>No search results, please try again.</p>}
       <Footer />
     </CategoryContainer>
   );
