@@ -11,8 +11,9 @@ const CarouselWrapper = styled("div", {
   overflow: "hidden",
   width: "100%",
   margin: "0",
-  paddingBottom: "15px",
+  padding: "10px",
   backgroundColor: "var(--color-secondary)",
+  zIndex: 1,
 });
 
 const CarouselContent = styled("div", {
@@ -70,8 +71,7 @@ const CarouselTitle = styled("h2", {
   fontStyle: "italic",
   letterSpacing: "4px",
   textAlign: "center",
-  paddingTop: "2px",
-  marginBottom: "5px",
+  textTransform: "uppercase",
   animation: `${blink} 2s ease-in-out infinite`,
   "@media (min-width: 768px)": {
     fontSize: "1.5rem",
@@ -86,10 +86,10 @@ const BreakingNewsCarousel = ({ news }) => {
 
   return (
     <CarouselWrapper>
+      <CarouselTitle>Breaking News</CarouselTitle>
       <CarouselContent>
         {duplicatedNews.map((article, index) => (
           <div key={index}>
-            <CarouselTitle>Breaking News</CarouselTitle>
             <CarouselItem>
               <ItemWrapper>
                 <NewsCard
