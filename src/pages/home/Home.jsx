@@ -1,10 +1,11 @@
+// Home.js
+
 import { useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
 import Spinner from "../../components/common/spinner/Spinner";
-import { styled } from "../../styles/globalStyles";
-import { Search } from "lucide-react";
 import globusVideo from "../../assets/video/Globus.mp4";
+import { styled } from "../../styles/globalStyles";
 
 const LatestNews = lazy(() => import("../../components/specific/latestNews/LatestNews"));
 const BreakingNewsCarousel = lazy(() => import("../../components/specific/breakingNews/BreakingNewsCarousel"));
@@ -14,85 +15,26 @@ const BackgroundVideo = styled("video", {
   top: 0,
   left: 0,
   width: "100vw",
-  height: "100vh",
+  height: "50vh", // 50% der Viewport-Höhe
   objectFit: "cover",
-  zIndex: -1,
-  "@media (max-width: 599px)": {
-    objectFit: "cover",
-  },
-  "@media (min-width: 600px) and (max-width: 1199px)": {
-    objectFit: "cover",
-  },
-  "@media (min-width: 1200px)": {
-    objectFit: "cover",
-  },
+  zIndex: 1,
 });
 
 const HomeContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  maxWidth: "1400px",
-  margin: "10px auto",
-  zIndex: 1,
+  width: "100vw",
+  minHeight: "100vh",
+  margin: "0 auto",
   gap: "20px",
   position: "relative",
-});
-
-const SearchContainer = styled("div", {
-  margin: "10px 0",
-  width: "100%",
-  maxWidth: "600px",
-  display: "flex",
-  alignItems: "center",
-  border: "2px solid var(--color-primary)",
-  borderRadius: "5px",
-  overflow: "hidden",
   backgroundColor: "var(--color-background)",
-  transition: "border 0.3s ease, box-shadow 0.3s ease",
-  "&:focus-within": {
-    border: "2px solid var(--color-buttonHover)",
-    boxShadow: "0px 0px 8px var(--color-buttonHover)",
-  },
-});
-
-const SearchInput = styled("input", {
-  flex: 1,
-  padding: "10px",
-  fontSize: "1rem",
-  color: "var(--color-font)",
-  backgroundColor: "var(--color-background)",
-  border: "none",
-  outline: "none",
-  "&::placeholder": {
-    color: "var(--color-secondary)",
-  },
-});
-
-const SearchButton = styled("button", {
-  backgroundColor: "var(--color-button)",
-  border: "none",
-  padding: "10px",
-  cursor: "pointer",
-  transition: "background-color 0.3s ease",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  "&:hover": {
-    backgroundColor: "var(--color-buttonHover)",
-  },
-});
-
-const SearchIcon = styled(Search, {
-  color: "var(--color-font)",
-  width: "20px",
-  height: "20px",
 });
 
 const Home = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState("");
 
   const apiKey = process.env.REACT_APP_API_KEY;
   const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
@@ -112,23 +54,6 @@ const Home = () => {
     fetchNews();
   }, [url]);
 
-  const fetchSearchResults = async () => {
-    if (query.trim() === "") return;
-    const searchUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
-    try {
-      const { data } = await axios.get(searchUrl);
-      setNews(data.articles);
-    } catch (error) {
-      console.error("Fehler beim Abrufen der Suchergebnisse:", error);
-    }
-  };
-
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      fetchSearchResults();
-    }
-  };
-
   return (
     <>
       <BackgroundVideo
@@ -144,25 +69,7 @@ const Home = () => {
       </BackgroundVideo>
 
       <HomeContainer>
-        <SearchContainer>
-          <SearchInput
-            type="text"
-            placeholder="searching for news..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleSearch}
-          />
-          <SearchButton onClick={fetchSearchResults}>
-            <SearchIcon />
-          </SearchButton>
-        </SearchContainer>
-
-        <Suspense
-          fallback={
-            <div style={{ margin: "100px auto" }}>
-              <Spinner />
-            </div>
-          }>
+        <Suspense fallback={<Spinner />}>
           <BreakingNewsCarousel news={news} />
           <LatestNews />
         </Suspense>

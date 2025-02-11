@@ -8,6 +8,9 @@ const Card = styled("div", {
   width: "100%",
   borderRadius: "8px",
   overflow: "hidden",
+  backgroundColor: "var(--color-background)",
+  color: "var(--color-font)",
+
   transition: "transform 0.2s ease-in-out",
   "&:hover": {
     transform: "translateY(-5px)",
@@ -20,6 +23,7 @@ const CardMedia = styled("div", {
   height: "140px",
   overflow: "hidden",
   cursor: "pointer",
+
   "&:hover .descriptionOverlay": {
     opacity: 1,
   },
@@ -97,12 +101,12 @@ const ExternalLinkButton = styled(Button, {
   },
 });
 
-const NewsCard = ({ title, description, urlToImage, url }) => {
+function NewsCard({ title, description, urlToImage, url }) {
   const theme = useContext(ThemeContext);
   if (!theme) return null;
 
   return (
-    <Card darkMode={theme.darkMode}>
+    <Card>
       <CardMedia>
         <Image
           src={urlToImage ? urlToImage : noImage}
@@ -123,6 +127,6 @@ const NewsCard = ({ title, description, urlToImage, url }) => {
       </CardMedia>
     </Card>
   );
-};
+}
 
 export default NewsCard;
