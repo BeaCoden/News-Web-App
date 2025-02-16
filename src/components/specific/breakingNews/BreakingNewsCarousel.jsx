@@ -13,7 +13,7 @@ const CarouselWrapper = styled("div", {
   margin: "0",
   padding: "10px",
   backgroundColor: "var(--color-secondary)",
-  zIndex: 1,
+  zIndex: 2,
 });
 
 const CarouselContent = styled("div", {

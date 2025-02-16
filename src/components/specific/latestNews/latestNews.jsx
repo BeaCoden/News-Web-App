@@ -12,7 +12,7 @@ const Container = styled("div", {
   alignItems: "center",
   maxWidth: "1400px",
   margin: "10px auto",
-  zIndex: 1,
+  zIndex: 0,
   gap: "20px",
 });
 

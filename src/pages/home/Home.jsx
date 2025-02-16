@@ -1,15 +1,16 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import axios from "axios";
 import Footer from "../../components/common/footer/Footer";
 import Spinner from "../../components/common/spinner/Spinner";
 import OnBuild from "../../components/specific/onBuild/OnBuild";
 import globusVideo from "../../assets/video/Globus.mp4";
 import { styled } from "../../styles/globalStyles";
+import { motion, useAnimation } from "framer-motion";
 
-const LatestNews = lazy(() => import("../../components/specific/latestNews/LatestNews"));
+const LatestNews = lazy(() => import("../../components/specific/latestNews/latestNews"));
 const BreakingNewsCarousel = lazy(() => import("../../components/specific/breakingNews/BreakingNewsCarousel"));
 
-const resetTime = Date.now() + 21 * 60 * 60 * 1000 + 46 * 60 * 1000 + 27 * 1000; // Sekundengenau
+const resetTime = Date.now() + 21 * 60 * 60 * 1000 + 46 * 60 * 1000 + 27 * 1000;
 
 const BackgroundVideo = styled("video", {
   position: "fixed",
@@ -18,7 +19,7 @@ const BackgroundVideo = styled("video", {
   width: "100vw",
   height: "50vh",
   objectFit: "cover",
-  zIndex: 1,
+  zIndex: 2,
 });
 
 const HomeContainer = styled("div", {
@@ -36,10 +37,27 @@ const HomeContainer = styled("div", {
 const Home = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [apiError, setApiError] = useState(false); // apiError hinzugefügt
+  const [apiError, setApiError] = useState(false);
+  const controls = useAnimation();
+  const videoRef = useRef(null);
 
   const apiKey = process.env.REACT_APP_API_KEY;
   const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+
+  const checkScroll = () => {
+    if (window.scrollY > 500) {
+      // Ändere 500 zu dem Punkt, wo die Animation starten soll
+      controls.start({ y: "-100vh", transition: { delay: 1, duration: 0.5 } }); // Verzögerte Animation
+    } else {
+      controls.stop();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScroll);
+
+    return () => window.removeEventListener("scroll", checkScroll);
+  }, []);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -47,10 +65,10 @@ const Home = () => {
       try {
         const { data } = await axios.get(url);
         setNews(data.articles);
-        setApiError(false); // Falls erfolgreich, Fehler zurücksetzen
+        setApiError(false);
       } catch (error) {
         console.error("Failed to fetch news:", error);
-        setApiError(true); // Falls Fehler, OnBuild anzeigen
+        setApiError(true);
       } finally {
         setLoading(false);
       }
@@ -60,20 +78,25 @@ const Home = () => {
 
   return (
     <>
-      <BackgroundVideo
-        autoPlay
-        loop
-        muted
-        playsInline>
-        <source
-          src={globusVideo}
-          type="video/mp4"
-        />
-        Dein Browser unterstützt keine Videos.
-      </BackgroundVideo>
+      <motion.div
+        ref={videoRef}
+        initial={{ y: 0 }}
+        animate={controls}>
+        <BackgroundVideo
+          autoPlay
+          loop
+          muted
+          playsInline>
+          <source
+            src={globusVideo}
+            type="video/mp4"
+          />
+          Dein Browser unterstützt keine Videos.
+        </BackgroundVideo>
+      </motion.div>
 
       <HomeContainer>
-        {apiError && <OnBuild resetTime={resetTime} />} {/* apiError fix */}
+        {apiError && <OnBuild resetTime={resetTime} />}
         <Suspense fallback={<Spinner />}>
           <BreakingNewsCarousel news={news} />
           <LatestNews />
